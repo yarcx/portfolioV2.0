@@ -4,7 +4,6 @@ import {
   Flex,
   HStack,
   Heading,
-  VStack,
   useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
