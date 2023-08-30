@@ -1,14 +1,18 @@
-import { useState } from "react";
-import "./App.css";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import Layout from "./components/Layout";
+import { Route, Routes } from "react-router-dom";
+import About from "./pages/about";
+import Contact from "./pages/contact";
 
 function App() {
-  const [count] = useState(2);
-
   return (
-    <Box bg='brand.100' h='100dvh'>
-      <Heading>The Begining ove portfolio version {count}</Heading>
-    </Box>
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<Box>inside box</Box>} />
+        <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
+      </Route>
+    </Routes>
   );
 }
 
