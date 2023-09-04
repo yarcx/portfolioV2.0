@@ -18,7 +18,7 @@ const PageInfoHeader = () => {
           <IconButton
             aria-label='Go Back'
             background='none'
-            _hover={{ opacity: ".3" }}
+            _hover={{ opacity: ".9" }}
             isRound
             onClick={() => navigate(-1)}
             icon={<MdOutlineKeyboardBackspace />}
