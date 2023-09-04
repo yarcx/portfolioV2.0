@@ -52,8 +52,8 @@ const LeftSideBar = () => {
   const { pathname } = useLocation();
   return (
     <Box as='aside' w={"300px"} display={{ base: "none", lg: "block" }} py='.6rem'>
-      <Heading color='brand.100' pl={3}>
-        Yarcx
+      <Heading color='brand.100' pl={3} className='logoFonts' fontWeight={600}>
+        <Link to='/'>Yarcx</Link>
       </Heading>
       <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
         {PageLink.map(({ link, route, icon }) => {
