@@ -1,7 +1,12 @@
 import { Box } from "@chakra-ui/react";
+import PageInfoHeader from "../components/PageInfoHeader";
 
 const ErrorPage = () => {
-  return <Box h='100vh'>404 Page</Box>;
+  return (
+    <Box as='main' w='full'>
+      <PageInfoHeader />
+    </Box>
+  );
 };
 
 export default ErrorPage;

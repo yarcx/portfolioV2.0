@@ -51,7 +51,12 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
 const LeftSideBar = () => {
   const { pathname } = useLocation();
   return (
-    <Box as='aside' w={"300px"} display={{ base: "none", lg: "block" }} py='.6rem'>
+    <Box
+      as='aside'
+      w={["", "", "170px", "250px"]}
+      display={["none", "none", "block", "block"]}
+      py='.6rem'
+    >
       <Heading color='brand.100' pl={3} className='logoFonts' fontWeight={600}>
         <Link to='/'>Yarcx</Link>
       </Heading>
@@ -67,6 +72,20 @@ const LeftSideBar = () => {
             />
           );
         })}
+
+        {/*  */}
+        <Button
+          _hover={{ bg: "brand.100", opacity: "0.8" }}
+          size='md'
+          bg='brand.100'
+          height='48px'
+          width='200px'
+          color='white'
+          rounded='3xl'
+          mt='.5rem'
+        >
+          Display Settings
+        </Button>
       </VStack>
     </Box>
   );
