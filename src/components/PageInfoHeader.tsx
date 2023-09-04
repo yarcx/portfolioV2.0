@@ -10,6 +10,7 @@ const PageInfoHeader = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
+
   return (
     <HStack as='header' justifyContent='space-between' p={3}>
       <HStack as='div'>
@@ -17,8 +18,7 @@ const PageInfoHeader = () => {
           <IconButton
             aria-label='Go Back'
             background='none'
-            minW='0'
-            _hover={{ background: "none" }}
+            _hover={{ opacity: ".3" }}
             isRound
             onClick={() => navigate(-1)}
             icon={<MdOutlineKeyboardBackspace />}

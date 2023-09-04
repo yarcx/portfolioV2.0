@@ -1,14 +1,11 @@
-import { Box, Flex, HStack, useColorMode, useColorModeValue } from "@chakra-ui/react";
-import { BLACK_BG, LIGHT_MODE, WHITE_BG } from "../utils/constants";
+import { Box, Flex, HStack, useColorModeValue } from "@chakra-ui/react";
+import { BLACK_BG, WHITE_BG } from "../utils/constants";
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "./Layout/LeftSideBar";
 
 const Layout = () => {
-  const { colorMode } = useColorMode();
   const bg = useColorModeValue(WHITE_BG, BLACK_BG);
-  const borderColor2 = useColorModeValue("light.100", "dark.100");
-  const borderColor = colorMode === LIGHT_MODE ? "light.100" : "dark.100";
-  console.log("🚀 ~ file: Layout.tsx:10 ~ Layout ~ borderColor2:", borderColor2, borderColor);
+  const borderColor = useColorModeValue("light.100", "dark.100");
   return (
     <Box
       bg={bg}
@@ -31,7 +28,7 @@ const Layout = () => {
         <Flex
           borderLeft={["", "", "1px solid", "1px solid"]}
           borderRight={["", "", "", "", "1px solid"]}
-          borderColor={["", "", "", borderColor2, borderColor2]}
+          borderColor={["", "", "", borderColor, borderColor]}
           flexGrow={1}
         >
           <Outlet />

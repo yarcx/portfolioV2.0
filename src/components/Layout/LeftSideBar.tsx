@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { LIGHT_MODE, PageLink } from "../../utils/constants";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 interface LinkButtonProps {
   link: string;
@@ -50,6 +50,9 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
 
 const LeftSideBar = () => {
   const { pathname } = useLocation();
+  const [hc, setHc] = useState(false);
+  console.log("🚀 ~ file: LeftSideBar.tsx:54 ~ LeftSideBar ~ hc:", hc);
+
   return (
     <Box
       as='aside'
@@ -57,7 +60,7 @@ const LeftSideBar = () => {
       display={["none", "none", "block", "block"]}
       py='.6rem'
     >
-      <Heading color='brand.100' pl={3} className='logoFonts' fontWeight={600}>
+      <Heading color={!hc ? "red.200" : "brand.100"} pl={3} className='logoFonts' fontWeight={600}>
         <Link to='/'>Yarcx</Link>
       </Heading>
       <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
@@ -73,16 +76,17 @@ const LeftSideBar = () => {
           );
         })}
 
-        {/*  */}
+        {/* Display Settings */}
         <Button
-          _hover={{ bg: "brand.100", opacity: "0.8" }}
+          _hover={{ bg: !hc ? "red.200" : "brand.100", opacity: "0.8" }}
           size='md'
-          bg='brand.100'
+          bg={!hc ? "red.200" : "brand.100"}
           height='48px'
           width='200px'
           color='white'
           rounded='3xl'
           mt='.5rem'
+          onClick={() => setHc(!hc)}
         >
           Display Settings
         </Button>
