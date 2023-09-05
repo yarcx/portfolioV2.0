@@ -1,14 +1,13 @@
-import { Box, Flex, HStack, useColorModeValue } from "@chakra-ui/react";
-import { BLACK_BG, WHITE_BG } from "../utils/constants";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import LeftSideBar from "./Layout/LeftSideBar";
+import useDisplayHooks from "../hooks/useDisplayHooks";
 
 const Layout = () => {
-  const bg = useColorModeValue(WHITE_BG, BLACK_BG);
-  const borderColor = useColorModeValue("light.100", "dark.100");
+  const { bgColor, borderColor } = useDisplayHooks();
   return (
     <Box
-      bg={bg}
+      bg={bgColor}
       bgPosition={"center bottom center"}
       position='relative'
       bgRepeat='no-repeat'
@@ -28,7 +27,7 @@ const Layout = () => {
         <Flex
           borderLeft={["", "", "1px solid", "1px solid"]}
           borderRight={["", "", "", "", "1px solid"]}
-          borderColor={["", "", "", borderColor, borderColor]}
+          borderColor={["", "", borderColor, borderColor, borderColor]}
           flexGrow={1}
         >
           <Outlet />

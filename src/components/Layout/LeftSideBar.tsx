@@ -2,24 +2,16 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Drawer,
   HStack,
   Heading,
   Text,
   VStack,
   useColorMode,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Input,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 import { LIGHT_MODE, PageLink } from "../../utils/constants";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
+import useUiContext from "../../hooks/useUiContext";
 
 interface LinkButtonProps {
   link: string;
@@ -59,10 +51,10 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
 
 const LeftSideBar = () => {
   const { pathname } = useLocation();
-  const [hc, setHc] = useState(false);
-  console.log("🚀 ~ file: LeftSideBar.tsx:54 ~ LeftSideBar ~ hc:", hc);
 
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const {
+    state: { uiColor },
+  } = useUiContext();
 
   return (
     <>
@@ -72,12 +64,7 @@ const LeftSideBar = () => {
         display={["none", "none", "block", "block"]}
         py='.6rem'
       >
-        <Heading
-          color={!hc ? "red.200" : "brand.100"}
-          pl={3}
-          className='logoFonts'
-          fontWeight={600}
-        >
+        <Heading color={uiColor} pl={3} className='logoFonts' fontWeight={600}>
           <Link to='/'>Yarcx</Link>
         </Heading>
         <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
@@ -95,41 +82,19 @@ const LeftSideBar = () => {
 
           {/* Display Settings */}
           <Button
-            _hover={{ bg: !hc ? "red.200" : "brand.100", opacity: "0.8" }}
+            _hover={{ bg: uiColor, opacity: "0.8" }}
             size='md'
-            bg={!hc ? "red.200" : "brand.100"}
+            bg={uiColor}
             height='48px'
-            width='200px'
+            width={["auto", "", "", "200px"]}
             color='white'
             rounded='3xl'
             mt='.5rem'
-            onClick={() => {
-              setHc(!hc);
-              onOpen();
-            }}
           >
             Display Settings
           </Button>
         </VStack>
       </Box>
-      <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
-
-          <DrawerBody>
-            <Input placeholder='Type here...' />
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };

@@ -20,12 +20,14 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { DARK_MODE, HOME, LIGHT_MODE, PageLink } from "../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
+import useDisplayHooks from "../hooks/useDisplayHooks";
 
 const PageInfoHeader = () => {
   const { colorMode, setColorMode } = useColorMode();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
+  const { bgColor, borderColor } = useDisplayHooks();
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -49,7 +51,7 @@ const PageInfoHeader = () => {
             background='none'
             _hover={{ opacity: ".9" }}
             isRound
-            display={["block", "", "", "", "none"]}
+            display={["block", "", "none", "none", "none"]}
             onClick={() => onOpen()}
             minW={0}
             icon={<AiOutlineMenu />}
@@ -75,7 +77,7 @@ const PageInfoHeader = () => {
       </HStack>
       <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg={bgColor} borderRight={`1px solid`} borderColor={borderColor}>
           <DrawerCloseButton />
           <DrawerHeader>Create your account</DrawerHeader>
 
