@@ -1,33 +1,17 @@
-import {
-  HStack,
-  IconButton,
-  Text,
-  useColorMode,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Input,
-  useDisclosure,
-  Drawer,
-  Button,
-} from "@chakra-ui/react";
+import { HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { GiNightSky } from "react-icons/gi";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { DARK_MODE, HOME, LIGHT_MODE, PageLink } from "../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
-import useDisplayHooks from "../hooks/useDisplayHooks";
+import MobileSidebar from "./MobileSidebar";
 
 const PageInfoHeader = () => {
   const { colorMode, setColorMode } = useColorMode();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
-  const { bgColor, borderColor } = useDisplayHooks();
 
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -53,7 +37,6 @@ const PageInfoHeader = () => {
             isRound
             display={["block", "", "none", "none", "none"]}
             onClick={() => onOpen()}
-            minW={0}
             icon={<AiOutlineMenu />}
           />
           <Text>{currentPage || HOME}</Text>
@@ -75,24 +58,7 @@ const PageInfoHeader = () => {
           />
         )}
       </HStack>
-      <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent bg={bgColor} borderRight={`1px solid`} borderColor={borderColor}>
-          <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
-
-          <DrawerBody>
-            <Input placeholder='Type here...' />
-          </DrawerBody>
-
-          <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+      <MobileSidebar isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

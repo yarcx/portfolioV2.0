@@ -20,6 +20,45 @@ interface LinkButtonProps {
   Icon: ReactNode;
 }
 
+export const SideBarButtons = () => {
+  const { pathname } = useLocation();
+
+  const {
+    state: { uiColor },
+    changeUiColor,
+  } = useUiContext();
+  return (
+    <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
+      {PageLink.map(({ link, route, icon }) => {
+        return (
+          <LinkButton
+            key={link}
+            link={link}
+            route={route}
+            isActive={pathname === route}
+            Icon={icon}
+          />
+        );
+      })}
+
+      {/* Display Settings */}
+      <Button
+        _hover={{ bg: uiColor, opacity: "0.8" }}
+        size='md'
+        bg={uiColor}
+        height='48px'
+        width={["auto", "", "", "200px"]}
+        color='white'
+        rounded='3xl'
+        mt='.5rem'
+        onClick={() => changeUiColor("brand.100")}
+      >
+        Display Settings
+      </Button>
+    </VStack>
+  );
+};
+
 const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
   const { colorMode } = useColorMode();
 
@@ -50,11 +89,8 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
 };
 
 const LeftSideBar = () => {
-  const { pathname } = useLocation();
-
   const {
     state: { uiColor },
-    changeUiColor,
   } = useUiContext();
 
   return (
@@ -68,34 +104,7 @@ const LeftSideBar = () => {
         <Heading color={uiColor} pl={3} className='logoFonts' fontWeight={600}>
           <Link to='/'>Yarcx</Link>
         </Heading>
-        <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
-          {PageLink.map(({ link, route, icon }) => {
-            return (
-              <LinkButton
-                key={link}
-                link={link}
-                route={route}
-                isActive={pathname === route}
-                Icon={icon}
-              />
-            );
-          })}
-
-          {/* Display Settings */}
-          <Button
-            _hover={{ bg: uiColor, opacity: "0.8" }}
-            size='md'
-            bg={uiColor}
-            height='48px'
-            width={["auto", "", "", "200px"]}
-            color='white'
-            rounded='3xl'
-            mt='.5rem'
-            onClick={() => changeUiColor("black")}
-          >
-            Display Settings
-          </Button>
-        </VStack>
+        <SideBarButtons />
       </Box>
     </>
   );
