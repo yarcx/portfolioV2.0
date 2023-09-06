@@ -10,18 +10,22 @@ export interface IState {
   modalType: string;
 }
 
-const initialValue: IState = {
+const initialState = {
   uiColor: "brand.100",
   isModalOpen: false,
   modalType: "",
 };
 
 export const UiDisplayContext = createContext<{
-  state: IState;
-  dispatch: React.ReducerWithoutAction<unknown>;
-}>({ dispatch: () => {}, state: initialValue });
+  changeUiColor: (color: string) => void;
+  state: {
+    uiColor: string;
+    isModalOpen: boolean;
+    modalType: string;
+  };
+}>({ changeUiColor: () => {}, state: initialState });
 
-function reducer(state: IState, action: { type: string; payload: unknown }) {
+const reducer = (state: IState, action: { type: string; payload: unknown }) => {
   switch (action.type) {
     case Change_Ui_Color:
       return { ...state, uiColor: action.payload };
@@ -40,12 +44,19 @@ function reducer(state: IState, action: { type: string; payload: unknown }) {
     default:
       return { ...state };
   }
-}
+};
 
 const UiDisplayContextProvider = ({ children }: { children: ReactElement }) => {
-  const [state, dispatch] = useReducer(reducer, initialValue);
+  const [state, dispatch] = useReducer(reducer, initialState as never);
+
+  const changeUiColor = (color: string) => {
+    dispatch({ type: Change_Ui_Color, payload: color });
+  };
+
   return (
-    <UiDisplayContext.Provider value={{ state, dispatch }}>{children}</UiDisplayContext.Provider>
+    <UiDisplayContext.Provider value={{ state, changeUiColor }}>
+      {children}
+    </UiDisplayContext.Provider>
   );
 };
 

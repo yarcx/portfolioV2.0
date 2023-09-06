@@ -54,6 +54,7 @@ const LeftSideBar = () => {
 
   const {
     state: { uiColor },
+    changeUiColor,
   } = useUiContext();
 
   return (
@@ -90,6 +91,7 @@ const LeftSideBar = () => {
             color='white'
             rounded='3xl'
             mt='.5rem'
+            onClick={() => changeUiColor("black")}
           >
             Display Settings
           </Button>
