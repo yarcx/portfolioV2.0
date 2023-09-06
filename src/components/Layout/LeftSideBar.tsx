@@ -25,7 +25,7 @@ export const SideBarButtons = () => {
 
   const {
     state: { uiColor },
-    changeUiColor,
+    openSettingsModal,
   } = useUiContext();
   return (
     <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
@@ -52,7 +52,7 @@ export const SideBarButtons = () => {
         rounded='3xl'
         mt='.5rem'
         px='1rem'
-        onClick={() => changeUiColor("brand.100")}
+        onClick={() => openSettingsModal()}
       >
         Display Settings
       </Button>

@@ -1,7 +1,7 @@
 import { Box, Flex, HStack } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
-import LeftSideBar from "./Layout/LeftSideBar";
-import useDisplayHooks from "../hooks/useDisplayHooks";
+import LeftSideBar from "./LeftSideBar";
+import useDisplayHooks from "../../hooks/useDisplayHooks";
 
 const Layout = () => {
   const { bgColor, borderColor } = useDisplayHooks();

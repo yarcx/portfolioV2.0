@@ -6,6 +6,7 @@ import { theme } from "./utils/themes.ts";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import UiDisplayContextProvider from "./context/UiDisplayContext.tsx";
+import ModalWrapper from "./components/ModalWrapper.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ChakraProvider resetCSS theme={theme}>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <App />
+          <ModalWrapper />
         </ChakraProvider>
       </UiDisplayContextProvider>
     </BrowserRouter>
