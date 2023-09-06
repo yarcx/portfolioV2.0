@@ -51,6 +51,7 @@ export const SideBarButtons = () => {
         color='white'
         rounded='3xl'
         mt='.5rem'
+        px='1rem'
         onClick={() => changeUiColor("brand.100")}
       >
         Display Settings

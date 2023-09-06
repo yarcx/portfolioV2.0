@@ -27,7 +27,7 @@ const MobileSidebar = ({ isOpen, onClose }: IProps) => {
     <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent bg={bgColor} borderRight={`1px solid`} borderColor={borderColor}>
-        <DrawerCloseButton />
+        <DrawerCloseButton top={5} />
         <DrawerHeader>
           <Heading color={uiColor} pl={3} className='logoFonts' fontWeight={600}>
             <Link to='/'>Yarcx</Link>
