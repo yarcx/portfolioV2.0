@@ -11,10 +11,8 @@ import {
 } from "@chakra-ui/react";
 import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
-import { DARK_MODE, LIGHT_MODE } from "../utils/constants";
+import { App_Ui_Colors, DARK_MODE, LIGHT_MODE } from "../utils/constants";
 import { MdCheck } from "react-icons/md";
-
-const Ui_Colors = ["brand.100", "#FFD400", "#F9197F", "#7855FF", "#FF7900"];
 
 const DisplaySettingsModal = () => {
   const {
@@ -49,7 +47,7 @@ const DisplaySettingsModal = () => {
             flexWrap='wrap'
             justify='space-between'
           >
-            {Ui_Colors.map((color) => (
+            {App_Ui_Colors.map((color) => (
               <HStack
                 align='center'
                 justify='center'
@@ -102,6 +100,7 @@ const DisplaySettingsModal = () => {
               px='2rem'
               border={colorMode === LIGHT_MODE ? "2px solid" : ""}
               borderColor={uiColor}
+              _hover={{ bg: "white", opacity: ".7" }}
             ></Button>
             <Button
               leftIcon={
@@ -123,6 +122,7 @@ const DisplaySettingsModal = () => {
               px='2rem'
               border={colorMode === DARK_MODE ? "2px solid" : ""}
               borderColor={uiColor}
+              _hover={{ bg: "black", opacity: ".7" }}
             ></Button>
           </HStack>
         </VStack>
@@ -130,7 +130,13 @@ const DisplaySettingsModal = () => {
 
       <ModalFooter>
         <HStack justifyContent='center' align='center' w='full'>
-          <Button mr={3} bg={uiColor} color='white' onClick={closeSettingsModal}>
+          <Button
+            mr={3}
+            _hover={{ bg: uiColor, opacity: ".7" }}
+            bg={uiColor}
+            color='white'
+            onClick={closeSettingsModal}
+          >
             Done
           </Button>
         </HStack>

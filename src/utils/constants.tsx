@@ -26,3 +26,5 @@ export const PageLink = [
   { link: PROJECT, route: PROJECT_LINK, icon: <RiMacLine size={20} /> },
   { link: CONTACT_ME, route: CONTACT_ME_LINK, icon: <RiQuestionAnswerLine size={20} /> },
 ];
+
+export const App_Ui_Colors = ["brand.100", "#FFD400", "#F9197F", "#7855FF", "#FF7900", "#00BA7C"];

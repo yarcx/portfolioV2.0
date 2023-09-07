@@ -1,4 +1,4 @@
-import { HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { GiNightSky } from "react-icons/gi";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -16,7 +16,7 @@ const PageInfoHeader = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <>
+    <Box>
       <HStack as='header' justifyContent='space-between' p={3}>
         <HStack as='div'>
           {currentPage !== HOME && (
@@ -59,7 +59,7 @@ const PageInfoHeader = () => {
         )}
       </HStack>
       <MobileSidebar isOpen={isOpen} onClose={onClose} />
-    </>
+    </Box>
   );
 };
 
