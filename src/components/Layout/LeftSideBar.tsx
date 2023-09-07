@@ -52,7 +52,8 @@ export const SideBarButtons = () => {
         rounded='3xl'
         mt='.5rem'
         px='1rem'
-        onClick={() => openSettingsModal()}
+        ml='.7rem'
+        onClick={() => openSettingsModal({ title: "Display Settings" })}
       >
         Display Settings
       </Button>

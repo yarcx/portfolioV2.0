@@ -1,31 +1,32 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { createContext, useReducer, ReactElement, useMemo } from "react";
+import { createContext, useReducer, ReactElement, useMemo, useCallback } from "react";
 
 export const Change_Ui_Color = "Change_Ui_Color";
 const Settings_Modal = "Settings_Modal";
 const Close_Modal = "Close_Modal";
 
+type IModalProps = {
+  [key: string]: unknown;
+};
 export interface IState {
   uiColor: string;
   isModalOpen: boolean;
   modalType: string;
+  modalProps: IModalProps;
 }
 
 const initialState: IState = {
   uiColor: "brand.100",
   isModalOpen: false,
   modalType: "",
+  modalProps: {},
 };
 
 interface IUiDisplayContext {
   changeUiColor: (color: string) => void;
   closeSettingsModal: () => void;
-  openSettingsModal: () => void;
-  state: {
-    uiColor: string;
-    isModalOpen: boolean;
-    modalType: string;
-  };
+  openSettingsModal: (data?: unknown) => void;
+  state: IState;
 }
 
 export const UiDisplayContext = createContext<IUiDisplayContext>({
@@ -44,6 +45,7 @@ const reducer = (state: IState, action: { type: string; payload: unknown }) => {
         ...state,
         isModalOpen: true,
         modalType: Settings_Modal,
+        modalProps: action.payload,
       };
     case Close_Modal:
       return {
@@ -64,20 +66,20 @@ const UiDisplayContextProvider = ({ children }: { children: ReactElement }) => {
     dispatch({ type: Change_Ui_Color, payload: color });
   };
 
-  const openSettingsModal = () => {
+  const openSettingsModal = (modalData?: unknown) => {
     dispatch({
       type: Settings_Modal,
-      payload: {},
+      payload: modalData,
     });
   };
 
-  const closeSettingsModal = () => {
+  const closeSettingsModal = useCallback(() => {
     dispatch({
       type: Close_Modal,
       payload: {},
     });
     onClose();
-  };
+  }, []);
 
   const values = useMemo(
     () => ({
@@ -86,7 +88,7 @@ const UiDisplayContextProvider = ({ children }: { children: ReactElement }) => {
       openSettingsModal,
       closeSettingsModal,
     }),
-    [state]
+    [state, closeSettingsModal]
   );
 
   return <UiDisplayContext.Provider value={values}>{children}</UiDisplayContext.Provider>;
