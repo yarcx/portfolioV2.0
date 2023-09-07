@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalCloseButton } from "@chakra-ui/react";
+import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import DisplaySettingsModal from "./DisplaySettingsModal";
@@ -15,11 +15,14 @@ const ModalWrapper = () => {
   const { bgColor, borderColor } = useDisplayHooks();
 
   return (
-    <Modal isOpen={isModalOpen} onClose={closeSettingsModal} isCentered>
+    <Modal
+      size={["sm", "md", "md", "lg"]}
+      isOpen={isModalOpen}
+      onClose={closeSettingsModal}
+      isCentered
+    >
       <ModalOverlay bg={"transparent"} backdropFilter='blur(1px) hue-rotate(10deg)' />
       <ModalContent bg={bgColor} border='1px solid' borderColor={borderColor}>
-        <ModalCloseButton />
-
         {SelectedModal[modalType as keyof typeof SelectedModal]}
       </ModalContent>
     </Modal>

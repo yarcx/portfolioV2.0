@@ -1,32 +1,139 @@
-import { ModalFooter, ModalBody, Button, ModalHeader } from "@chakra-ui/react";
+import {
+  ModalFooter,
+  ModalBody,
+  Button,
+  ModalHeader,
+  HStack,
+  VStack,
+  Text,
+  Checkbox,
+  useColorMode,
+} from "@chakra-ui/react";
 import useUiContext from "../hooks/useUiContext";
+import useDisplayHooks from "../hooks/useDisplayHooks";
+import { DARK_MODE, LIGHT_MODE } from "../utils/constants";
+import { MdCheck } from "react-icons/md";
+
+const Ui_Colors = ["brand.100", "#FFD400", "#F9197F", "#7855FF", "#FF7900"];
 
 const DisplaySettingsModal = () => {
   const {
-    state: { modalProps },
+    state: { modalProps, uiColor },
     closeSettingsModal,
+    changeUiColor,
   } = useUiContext();
+  const { borderColor, displayUiBg } = useDisplayHooks();
+  const { colorMode, setColorMode } = useColorMode();
+
   const title = modalProps?.title as string;
 
   return (
     <>
-      <ModalHeader>{title || "Modal Title"}</ModalHeader>
+      <ModalHeader textAlign='center' fontSize='xl' fontWeight='extrabold'>
+        {title || "Modal Title"}
+      </ModalHeader>
       <ModalBody>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis velit molestiae tempore
-        libero. Voluptatum exercitationem sunt eum, ipsum facilis voluptatem consectetur alias
-        distinctio excepturi rem maxime et ad earum numquam. Fugit amet distinctio quam aliquid,
-        ipsum voluptas nobis suscipit doloribus delectus molestias. Sapiente repellendus corrupti
-        nesciunt error officia at deserunt explicabo fugit, quasi libero id minima qui, pariatur
-        porro sequi? Eveniet sed aliquam, id voluptates vitae odio excepturi quam maiores saepe
-        tempore. Deleniti, laudantium saepe sed itaque deserunt sunt magnam error ab reprehenderit
-        aliquam alias nam maiores, nemo sequi facere.
+        <Text textAlign='center' color=''>
+          Use the settings bellow to customize the feel and look of the app
+        </Text>
+        <VStack align='start' mt={4}>
+          <Text fontSize='12px' fontWeight='bold' color='gray.500'>
+            Color
+          </Text>
+          <HStack
+            bg={displayUiBg}
+            w='full'
+            py='6px'
+            px='8px'
+            rounded='lg'
+            flexWrap='wrap'
+            justify='space-between'
+          >
+            {Ui_Colors.map((color) => (
+              <HStack
+                align='center'
+                justify='center'
+                key={color}
+                rounded='full'
+                cursor='pointer'
+                w='2.6rem'
+                h='2.6rem'
+                bg={color}
+                onClick={() => {
+                  changeUiColor(color);
+                }}
+              >
+                {uiColor === color && <MdCheck color='white' size='20' />}
+              </HStack>
+            ))}
+          </HStack>
+        </VStack>
+        <VStack align='start' mt={4}>
+          <Text fontSize='12px' fontWeight='bold' color='gray.500'>
+            Background
+          </Text>
+          <HStack
+            bg={displayUiBg}
+            w='full'
+            py='10px'
+            px='8px'
+            rounded='lg'
+            flexWrap='wrap'
+            justify='center'
+            gap='1rem'
+          >
+            <Button
+              leftIcon={
+                <Checkbox
+                  borderColor={borderColor}
+                  isChecked={colorMode === LIGHT_MODE}
+                  value={LIGHT_MODE}
+                  onChange={() => setColorMode(LIGHT_MODE)}
+                >
+                  Default
+                </Checkbox>
+              }
+              bg='white'
+              onClick={() => setColorMode(LIGHT_MODE)}
+              color='black'
+              size='lg'
+              fontSize='bold'
+              py='2rem'
+              px='2rem'
+              border={colorMode === LIGHT_MODE ? "2px solid" : ""}
+              borderColor={uiColor}
+            ></Button>
+            <Button
+              leftIcon={
+                <Checkbox
+                  borderColor={borderColor}
+                  isChecked={colorMode === DARK_MODE}
+                  value={DARK_MODE}
+                  onChange={() => setColorMode(DARK_MODE)}
+                >
+                  Light out
+                </Checkbox>
+              }
+              bg='black'
+              onClick={() => setColorMode(DARK_MODE)}
+              color='white'
+              size='lg'
+              fontSize='bold'
+              py='2rem'
+              px='2rem'
+              border={colorMode === DARK_MODE ? "2px solid" : ""}
+              borderColor={uiColor}
+            ></Button>
+          </HStack>
+        </VStack>
       </ModalBody>
 
       <ModalFooter>
-        <Button mr={3} onClick={closeSettingsModal}>
-          Close
-        </Button>
-        <Button variant='ghost'>Secondary Action</Button>
+        <HStack justifyContent='center' align='center' w='full'>
+          <Button mr={3} bg={uiColor} color='white' onClick={closeSettingsModal}>
+            Done
+          </Button>
+        </HStack>
       </ModalFooter>
     </>
   );
