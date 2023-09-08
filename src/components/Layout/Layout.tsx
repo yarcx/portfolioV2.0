@@ -29,7 +29,7 @@ const Layout = () => {
           borderRight={["", "", "", "", "1px solid"]}
           borderColor={["", "", borderColor, borderColor, borderColor]}
           flexGrow={1}
-          maxW='650px'
+          maxW={["100%", "100%", "100%", "650px", "650px"]}
           mx='auto'
         >
           <Outlet />

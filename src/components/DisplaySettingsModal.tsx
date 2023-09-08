@@ -20,7 +20,7 @@ const DisplaySettingsModal = () => {
     closeSettingsModal,
     changeUiColor,
   } = useUiContext();
-  const { borderColor, displayUiBg } = useDisplayHooks();
+  const { borderColor, displayUiBg, grayText } = useDisplayHooks();
   const { colorMode, setColorMode } = useColorMode();
 
   const title = modalProps?.title as string;
@@ -34,8 +34,9 @@ const DisplaySettingsModal = () => {
         <Text textAlign='center' color=''>
           Use the settings bellow to customize the feel and look of the app
         </Text>
+
         <VStack align='start' mt={4}>
-          <Text fontSize='12px' fontWeight='bold' color='gray.500'>
+          <Text fontSize='12px' fontWeight='bold' color={grayText}>
             Color
           </Text>
           <HStack
@@ -66,8 +67,9 @@ const DisplaySettingsModal = () => {
             ))}
           </HStack>
         </VStack>
+
         <VStack align='start' mt={4}>
-          <Text fontSize='12px' fontWeight='bold' color='gray.500'>
+          <Text color={grayText} fontSize='12px' fontWeight='bold'>
             Background
           </Text>
           <HStack
@@ -101,6 +103,7 @@ const DisplaySettingsModal = () => {
               border={colorMode === LIGHT_MODE ? "2px solid" : ""}
               borderColor={uiColor}
               _hover={{ bg: "white", opacity: ".7" }}
+              width='150px'
             ></Button>
             <Button
               leftIcon={
@@ -123,6 +126,7 @@ const DisplaySettingsModal = () => {
               border={colorMode === DARK_MODE ? "2px solid" : ""}
               borderColor={uiColor}
               _hover={{ bg: "black", opacity: ".7" }}
+              width='150px'
             ></Button>
           </HStack>
         </VStack>
