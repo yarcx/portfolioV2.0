@@ -82,7 +82,7 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
           }}
         >
           <HStack gap={2}>
-            {Icon} <Text>{link}</Text>
+            {Icon} <Text display={["","","","",""]}>{link}</Text>
           </HStack>
         </Button>
       </ButtonGroup>
