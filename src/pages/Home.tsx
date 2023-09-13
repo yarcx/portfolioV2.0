@@ -3,11 +3,38 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { CONTACT_ME_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { MdLocationPin } from "react-icons/md";
-import { RiPinDistanceFill, RiTwitterFill } from "react-icons/ri";
+import { MdLocationPin, MdPersonPinCircle } from "react-icons/md";
+import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react-icons/bs";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
+
+const easyLinks = [
+  {
+    title: "Abuja Nigeria",
+    icon: <MdLocationPin />,
+  },
+  {
+    title: "Instagram",
+    icon: <BsInstagram />,
+  },
+  {
+    title: "Github",
+    icon: <BsGithub />,
+  },
+  {
+    title: "LinkedIn",
+    icon: <BsLinkedin />,
+  },
+  {
+    title: "Twitter",
+    icon: <BsTwitter />,
+  },
+  {
+    title: "09033872114",
+    icon: <BsTelephone />,
+  },
+];
 
 const Home = () => {
   const { borderColor, bgColor, grayText } = useDisplayHooks();
@@ -80,35 +107,35 @@ const Home = () => {
         borderColor={borderColor}
         my='1rem'
       >
-        <Button
-          bg='none'
-          color={grayText}
-          leftIcon={<MdLocationPin />}
-          colorScheme='teal'
-          variant='solid'
-          _hover={{ bg: "none" }}
-          py='1px'
-          px='0'
-        >
-          Nigeria
-        </Button>
-        <Button
-          bg='none'
-          color={grayText}
-          leftIcon={<RiTwitterFill />}
-          colorScheme='teal'
-          variant='solid'
-          _hover={{ bg: "none" }}
-          py='1px'
-          px='0'
-        >
-          Twitter
-        </Button>
+        {easyLinks.map((item, index) => (
+          <Button
+            key={index}
+            bg='none'
+            color={grayText}
+            leftIcon={item.icon}
+            colorScheme='teal'
+            variant='solid'
+            _hover={{ bg: "none" }}
+            py='1px'
+            px='0'
+            fontSize='sm'
+          >
+            <Text _hover={{ color: grayText }} transition='color .2s ease'>
+              {item.title}
+            </Text>
+          </Button>
+        ))}
       </HStack>
 
-      <HStack border='1px solid' borderColor={borderColor} py='.4rem' px='1rem'>
-        <VStack width='full' justifyContent='start' alignItems='center'>
-          <RiPinDistanceFill />
+      <HStack
+        borderBottom='1px solid'
+        alignItems='stretch'
+        borderColor={borderColor}
+        py='.4rem'
+        px='1rem'
+      >
+        <VStack width='full' justifyContent='start' alignItems='center' border='1px solid'>
+          <MdPersonPinCircle />
 
           <Box>
             <Image
@@ -127,7 +154,7 @@ const Home = () => {
           </Box>
         </VStack>
         <VStack alignItems='start'>
-          <Text fontWeight='bold' fontSize='sm'>
+          <Text fontWeight='normal' fontSize='sm'>
             About Me
           </Text>
           <Text fontWeight='normal' fontSize='md'>
