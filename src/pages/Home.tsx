@@ -4,7 +4,14 @@ import useDisplayHooks from "../hooks/useDisplayHooks";
 import { CONTACT_ME_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { MdLocationPin, MdPersonPinCircle } from "react-icons/md";
-import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react-icons/bs";
+import {
+  BsArrowBarRight,
+  BsGithub,
+  BsInstagram,
+  BsLinkedin,
+  BsTelephone,
+  BsTwitter,
+} from "react-icons/bs";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
@@ -134,12 +141,12 @@ const Home = () => {
         py='.4rem'
         px='1rem'
       >
-        <VStack width='full' justifyContent='start' alignItems='center' border='1px solid'>
+        <VStack width='60%' justifyContent='start' alignItems='center'>
           <MdPersonPinCircle />
 
           <Box>
             <Image
-              boxSize={["50px"]}
+              boxSize={["50px", "60px"]}
               rounded='full'
               border='4px solid'
               borderColor={bgColor}
@@ -154,18 +161,32 @@ const Home = () => {
           </Box>
         </VStack>
         <VStack alignItems='start'>
-          <Text fontWeight='normal' fontSize='sm'>
+          <Text fontWeight='medium' fontSize='sm'>
             About Me
           </Text>
-          <Text fontWeight='normal' fontSize='md'>
-            About Me Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius laboriosam
-            consequuntur laborum deleniti fugiat quisquam, sunt, eum distinctio placeat, rem iure
-            atque quibusdam earum nihil id harum vitae quis in? Magnam sapiente, distinctio itaque
-            tempora impedit dignissimos ab cupiditate molestias ratione, eligendi delectus,
-            doloribus quo aliquam ullam nostrum esse laboriosam cum quod corrupti asperiores ipsa
-            dolores molestiae totam! Commodi, quam.
+          <Text fontWeight='normal' fontSize='sm'>
+            Hello there! I'm Hassan Yaqub . A Software Engineer & Technical Writer Based in Nigeria.
+            I'm Experienced in building pixel-perfect frontend application and server side
+            applications. I'm passionate about sharing my experience in my career, and also some
+            technologies/concept that i believe can help someone out there. When i'm not working or
+            learning something new , then i must be working out at the Gym, or pplaying video Games,
+            or watching Anime or any movie with superhero in it.
           </Text>
         </VStack>
+      </HStack>
+
+      <HStack as='footer' justifyContent='end' my='1rem' px='1rem'>
+        <Link to='/resume'>
+          <HStack
+            as='div'
+            align='center'
+            transition='all 0.3s ease-in'
+            _hover={{ textDecor: "underline" }}
+          >
+            <Text> Check out resume</Text>
+            <BsArrowBarRight />
+          </HStack>
+        </Link>
       </HStack>
     </Box>
   );
