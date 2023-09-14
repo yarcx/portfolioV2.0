@@ -183,7 +183,7 @@ const Home = () => {
             transition='all 0.3s ease-in'
             _hover={{ textDecor: "underline" }}
           >
-            <Text> Check out resume</Text>
+            <Text>Check out resume</Text>
             <BsArrowBarRight />
           </HStack>
         </Link>

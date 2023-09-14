@@ -28,3 +28,50 @@ export const PageLink = [
 ];
 
 export const App_Ui_Colors = ["brand.100", "#FFD400", "#F9197F", "#7855FF", "#FF7900", "#00BA7C"];
+
+export const articleList = [
+  {
+    author: "Refactoring Guru",
+    title: "The Catalog of Design Patterns",
+    firstParagraph:
+      "These patterns provide various object creation mechanisms, which increase flexibility and reuse of existing code.",
+    linkUrl: "https://refactoring.guru/design-patterns/catalog",
+  },
+
+  {
+    author: "Danny Adams",
+    title: "Learn TypeScript – The Ultimate Beginners Guide",
+    linkUrl: "https://www.freecodecamp.org/news/learn-typescript-beginners-guide/",
+    firstParagraph:
+      "TypeScript has become increasingly popular over the last few years, and many jobs are now requiring developers to know TypeScript.",
+  },
+
+  {
+    author: "JavaScript Language",
+    title: "Class inheritance",
+    firstParagraph:
+      "Class inheritance is a way for one class to extend another class. So we can create new functionality on top of the existing.",
+    linkUrl: "https://javascript.info/class-inheritance",
+  },
+  {
+    author: "JavaScript Language",
+    title: "Class basic syntax",
+    firstParagraph:
+      "In object-oriented programming, a class is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).",
+    linkUrl: "https://javascript.info/class",
+  },
+  {
+    author: "JavaScript Language",
+    title: "Recursion and stack",
+    firstParagraph:
+      "Recursion is a programming pattern that is useful in situations when a task can be naturally split into several tasks of the same kind, but simpler. Or when a task can be simplified into an easy action plus a simpler variant of the same task. Or, as we’ll see soon, to deal with certain data structures.",
+    linkUrl: "https://javascript.info/recursion",
+  },
+  {
+    author: "Chimezie Innocent",
+    title: "Understanding React’s useEffect cleanup function",
+    linkUrl: "https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/",
+    firstParagraph:
+      "React’s useEffect cleanup function saves applications from unwanted behaviors like memory leaks by cleaning up effects. In doing so, we can optimize our application’s performance.",
+  },
+];
