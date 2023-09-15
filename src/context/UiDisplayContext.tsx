@@ -16,7 +16,9 @@ export interface IState {
 }
 
 const initialState: IState = {
-  uiColor: "brand.100",
+  uiColor: localStorage.getItem("uiColor")
+    ? (localStorage.getItem("uiColor") as string)
+    : "brand.100",
   isModalOpen: false,
   modalType: "",
   modalProps: {},
@@ -39,6 +41,8 @@ export const UiDisplayContext = createContext<IUiDisplayContext>({
 const reducer = (state: IState, action: { type: string; payload: unknown }) => {
   switch (action.type) {
     case Change_Ui_Color:
+      typeof action.payload == "string" &&
+        localStorage.setItem("uiColor", action?.payload as string);
       return { ...state, uiColor: action.payload };
     case Settings_Modal:
       return {
