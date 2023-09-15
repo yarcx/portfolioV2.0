@@ -3,7 +3,6 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-1;
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../db.config/firebase";
 import { useEffect, useState } from "react";
@@ -53,8 +52,6 @@ const ContactMe = () => {
     }
   };
 
-  console.log(errors, "errors");
-
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />
@@ -64,7 +61,8 @@ const ContactMe = () => {
         justifyContent='center'
         alignItems='center'
         as='form'
-        p='1rem'
+        px='.6rem'
+        py='1rem'
         onSubmit={handleSubmit(onSubmit)}
       >
         <VStack align='start' w='full' mb='1rem'>
