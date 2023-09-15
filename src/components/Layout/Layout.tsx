@@ -58,7 +58,7 @@ const Layout = () => {
             <Input
               rounded='3xl'
               _active={{ borderColor: uiColor, outline: uiColor }}
-              _focus={{ borderColor: uiColor, outline: uiColor }}
+              focusBorderColor={uiColor}
               bg={displayUiBg}
               type='text'
               placeholder='Search recent reads'
@@ -91,14 +91,12 @@ const Article = ({
   author,
   title,
   firstParagraph,
-  linkUrl,
 }: {
   author: string;
   title: string;
   firstParagraph: string;
-  linkUrl: string;
+  linkUrl?: string;
 }) => {
-  console.log("🚀 ~ file: Layout.tsx:74 ~ Article ~ item:", linkUrl);
   const { grayText } = useDisplayHooks();
   return (
     <Box my='1rem'>

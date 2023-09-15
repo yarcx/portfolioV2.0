@@ -50,8 +50,8 @@ export const SideBarButtons = () => {
         width={["auto", "", "", "200px"]}
         color='white'
         rounded='3xl'
-        mt='.5rem'
         px='1rem'
+        mt='.5rem'
         ml='.7rem'
         onClick={() => openSettingsModal({ title: "Display Settings" })}
       >
@@ -82,7 +82,7 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
           }}
         >
           <HStack gap={2}>
-            {Icon} <Text display={["","","","",""]}>{link}</Text>
+            {Icon} <Text display={["", "", "", "", ""]}>{link}</Text>
           </HStack>
         </Button>
       </ButtonGroup>
