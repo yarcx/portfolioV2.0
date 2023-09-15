@@ -16,7 +16,7 @@ type IMessageField = {
 
 const ContactMe = () => {
   const { borderColor, displayUiBg } = useDisplayHooks();
-  const [messages, setMessages] = useState();
+  const [messages, setMessages] = useState<IMessageField[]>();
   const {
     state: { uiColor },
   } = useUiContext();
@@ -29,7 +29,7 @@ const ContactMe = () => {
         const todo = await getDocs(collectionRef);
         console.log({ todo });
         const todoData = todo.docs.map((doc) => ({ ...doc.data() }));
-        setMessages(todoData);
+        setMessages(todoData as IMessageField[]);
       } catch (err) {
         console.log(err);
       }
@@ -37,6 +37,7 @@ const ContactMe = () => {
     getTodo();
   }, []);
 
+  console.log(messages);
   const {
     register,
     handleSubmit,
