@@ -13,9 +13,13 @@ import LeftSideBar from "./LeftSideBar";
 import useDisplayHooks from "../../hooks/useDisplayHooks";
 import { BsSearch } from "react-icons/bs";
 import { articleList } from "../../utils/constants";
+import useUiContext from "../../hooks/useUiContext";
 
 const Layout = () => {
   const { bgColor, borderColor, displayUiBg } = useDisplayHooks();
+  const {
+    state: { uiColor },
+  } = useUiContext();
   return (
     <Box
       bg={bgColor}
@@ -31,7 +35,7 @@ const Layout = () => {
         px={["", "", "1rem", "3rem"]}
         maxWidth='1400px'
         mx='auto'
-        h='100dvh'
+        minH='100vh'
       >
         <LeftSideBar />
 
@@ -51,7 +55,14 @@ const Layout = () => {
             <InputLeftElement pointerEvents='none'>
               <BsSearch color='gray.300' />
             </InputLeftElement>
-            <Input rounded='3xl' bg={displayUiBg} type='tel' placeholder='Search recent reads' />
+            <Input
+              rounded='3xl'
+              _active={{ borderColor: uiColor, outline: uiColor }}
+              _focus={{ borderColor: uiColor, outline: uiColor }}
+              bg={displayUiBg}
+              type='text'
+              placeholder='Search recent reads'
+            />
           </InputGroup>
           <Box mt='2rem' bg={displayUiBg} rounded='lg' py='.5rem' px={".8rem"}>
             <Heading size='md' mb='1rem'>
