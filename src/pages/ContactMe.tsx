@@ -1,4 +1,4 @@
-import { Box, Button, FormErrorMessage, Input, Textarea, VStack } from "@chakra-ui/react";
+import { Box, Button, FormErrorMessage, Input, Textarea, VStack, useToast } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
@@ -15,10 +15,11 @@ type IMessageField = {
 
 const ContactMe = () => {
   const { borderColor, displayUiBg } = useDisplayHooks();
-  const [messages, setMessages] = useState<IMessageField[]>();
+  const [, setMessages] = useState<IMessageField[]>();
   const {
     state: { uiColor },
   } = useUiContext();
+  const toast = useToast();
 
   const collectionRef = collection(db, "messages");
 
@@ -36,17 +37,25 @@ const ContactMe = () => {
     getTodo();
   }, []);
 
-  console.log(messages);
   const {
     register,
     handleSubmit,
-    formState: { isLoading, errors },
+    reset,
+    formState: { isLoading, errors, isSubmitting },
   } = useForm<IMessageField>();
 
   const onSubmit: SubmitHandler<IMessageField> = async (data) => {
     try {
       const res = await addDoc(collectionRef, data);
       console.log(res, "After submision");
+      toast({
+        title: "Message Submitted successfully.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        containerStyle: {},
+      });
+      reset();
     } catch (error) {
       console.log(error, "if error submision");
     }
@@ -67,9 +76,8 @@ const ContactMe = () => {
       >
         <VStack align='start' w='full' mb='1rem'>
           <Input
-            placeholder='Name'
+            placeholder='Full Name'
             _active={{ borderColor: uiColor, outline: uiColor }}
-            // _focus={{ borderColor: uiColor, outline: uiColor }}
             focusBorderColor={uiColor}
             bg={displayUiBg}
             type='text'
@@ -83,7 +91,7 @@ const ContactMe = () => {
           <Input
             _active={{ borderColor: uiColor, outline: uiColor }}
             focusBorderColor={uiColor}
-            placeholder='Email'
+            placeholder='Email address'
             bg={displayUiBg}
             type='email'
             size='md'
@@ -98,7 +106,7 @@ const ContactMe = () => {
           <Textarea
             _active={{ borderColor: uiColor, outline: uiColor }}
             focusBorderColor={uiColor}
-            placeholder='Message'
+            placeholder='Your Message'
             bg={displayUiBg}
             minH={"220px"}
             {...register("message", {
@@ -119,7 +127,7 @@ const ContactMe = () => {
             rounded='3xl'
             px='1rem'
             disabled={isLoading}
-            isLoading={isLoading}
+            isLoading={isSubmitting}
           >
             Submit Message
           </Button>

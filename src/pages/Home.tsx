@@ -106,32 +106,63 @@ const Home = () => {
       </HStack>
 
       <HStack
-        px={3}
-        pos='relative'
-        justifyContent='space-between'
-        width='100%'
+        my='1rem'
+        className='scroll-parent'
         borderBottom='1px solid'
         borderColor={borderColor}
-        my='1rem'
       >
-        {easyLinks.map((item, index) => (
-          <Button
-            key={index}
-            bg='none'
-            color={grayText}
-            leftIcon={item.icon}
-            colorScheme='teal'
-            variant='solid'
-            _hover={{ bg: "none" }}
-            py='1px'
-            px='0'
-            fontSize='sm'
-          >
-            <Text _hover={{ color: grayText }} transition='color .2s ease'>
-              {item.title}
-            </Text>
-          </Button>
-        ))}
+        <HStack
+          px={3}
+          justifyContent='space-between'
+          width='100%'
+          gap='5rem'
+          className='scroll-element primary'
+        >
+          {easyLinks.map((item, index) => (
+            <Button
+              key={index}
+              bg='none'
+              color={grayText}
+              leftIcon={item.icon}
+              colorScheme='teal'
+              variant='solid'
+              _hover={{ bg: "none" }}
+              py='1px'
+              px='0'
+              fontSize='sm'
+            >
+              <Text _hover={{ color: grayText }} transition='color .2s ease'>
+                {item.title}
+              </Text>
+            </Button>
+          ))}
+        </HStack>
+        <HStack
+          px={3}
+          justifyContent='space-between'
+          width='100%'
+          gap='5rem'
+          className='scroll-element secondary'
+        >
+          {easyLinks.map((item, index) => (
+            <Button
+              key={index}
+              bg='none'
+              color={grayText}
+              leftIcon={item.icon}
+              colorScheme='teal'
+              variant='solid'
+              _hover={{ bg: "none" }}
+              py='1px'
+              px='0'
+              fontSize='sm'
+            >
+              <Text _hover={{ color: grayText }} transition='color .2s ease'>
+                {item.title}
+              </Text>
+            </Button>
+          ))}
+        </HStack>
       </HStack>
 
       <HStack
