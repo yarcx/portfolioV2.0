@@ -140,6 +140,7 @@ const Home = () => {
         </HStack>
         <HStack
           px={3}
+          ml='3rem'
           justifyContent='space-between'
           width='100%'
           overflow='auto'
