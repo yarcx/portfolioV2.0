@@ -116,6 +116,7 @@ const Home = () => {
           justifyContent='space-between'
           width='100%'
           gap='5rem'
+          overflow='auto'
           className='scroll-element primary'
         >
           {easyLinks.map((item, index) => (
@@ -141,6 +142,7 @@ const Home = () => {
           px={3}
           justifyContent='space-between'
           width='100%'
+          overflow='auto'
           gap='5rem'
           className='scroll-element secondary'
         >
