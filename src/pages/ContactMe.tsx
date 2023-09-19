@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../db.config/firebase";
 import { useEffect, useState } from "react";
+import CustomToastBar from "../components/CustomToastBar";
 
 type IMessageField = {
   name: string;
@@ -35,6 +36,8 @@ const ContactMe = () => {
       }
     };
     getTodo();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -49,17 +52,20 @@ const ContactMe = () => {
       const res = await addDoc(collectionRef, data);
       console.log(res, "After submision");
       toast({
-        title: "Message Submitted successfully.",
         status: "success",
         duration: 3000,
         isClosable: true,
-        containerStyle: {},
+        variant: "top-accent",
+        position: "top",
+        render: () => <CustomToastBar title={"Message Submitted successfully."} />,
       });
       reset();
     } catch (error) {
       console.log(error, "if error submision");
     }
   };
+
+  console.log(errors.name);
 
   return (
     <Box as='main' w='full'>
@@ -85,7 +91,7 @@ const ContactMe = () => {
             errorBorderColor='red.600'
             {...register("name", { required: { value: true, message: "Name field is required" } })}
           />
-          {errors["name"] && <FormErrorMessage>Name is required.</FormErrorMessage>}
+          {errors.name && <FormErrorMessage>Name is required.</FormErrorMessage>}
         </VStack>
         <VStack align='start' w='full' mb='1rem'>
           <Input
