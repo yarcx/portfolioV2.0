@@ -3,16 +3,17 @@ import {
   Flex,
   HStack,
   Heading,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
 } from "@chakra-ui/react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import LeftSideBar from "./LeftSideBar";
 import useDisplayHooks from "../../hooks/useDisplayHooks";
 import { BsSearch } from "react-icons/bs";
-import { articleList } from "../../utils/constants";
+import { PageLink, articleList } from "../../utils/constants";
 import useUiContext from "../../hooks/useUiContext";
 
 const Layout = () => {
@@ -35,7 +36,9 @@ const Layout = () => {
         px={["", "", "1rem", "3rem"]}
         maxWidth='1400px'
         mx='auto'
-        minH='100vh'
+        minH='100dvh'
+        overflowY='auto'
+        pos='relative'
       >
         <LeftSideBar />
 
@@ -46,8 +49,30 @@ const Layout = () => {
           flexGrow={1}
           maxW={["100%", "100%", "100%", "650px", "650px"]}
           mx='auto'
+          position='relative'
         >
           <Outlet />
+          <HStack
+            borderTop='.6px solid'
+            borderColor={borderColor}
+            pos='fixed'
+            bottom='0'
+            height='60px'
+            width='100%'
+            display={["flex", "flex", "none", "none"]}
+            p={3}
+            justifyContent='space-between'
+            zIndex={10}
+            bg={bgColor}
+          >
+            {PageLink.map(({ icon, route }) => {
+              return (
+                <Link key={route} to={route}>
+                  <IconButton bg='none' aria-label='Navigation Button' icon={icon} isRound />
+                </Link>
+              );
+            })}
+          </HStack>
         </Flex>
 
         <Box w={"370px"} as='aside' display={["none", "none", "none", "none", "block"]} py='.6rem'>

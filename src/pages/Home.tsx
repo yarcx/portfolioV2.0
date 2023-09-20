@@ -1,47 +1,13 @@
 import { Box, Button, HStack, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
-import { CONTACT_ME_LINK } from "../utils/constants";
+import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { MdLocationPin, MdPersonPinCircle } from "react-icons/md";
-import {
-  BsArrowBarRight,
-  BsGithub,
-  BsInstagram,
-  BsLinkedin,
-  BsTelephone,
-  BsTwitter,
-} from "react-icons/bs";
+import { MdPersonPinCircle } from "react-icons/md";
+import { BsArrowBarRight } from "react-icons/bs";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
-
-const easyLinks = [
-  {
-    title: "Abuja Nigeria",
-    icon: <MdLocationPin />,
-  },
-  {
-    title: "Instagram",
-    icon: <BsInstagram />,
-  },
-  {
-    title: "Github",
-    icon: <BsGithub />,
-  },
-  {
-    title: "LinkedIn",
-    icon: <BsLinkedin />,
-  },
-  {
-    title: "Twitter",
-    icon: <BsTwitter />,
-  },
-  {
-    title: "09033872114",
-    icon: <BsTelephone />,
-  },
-];
 
 const Home = () => {
   const { borderColor, bgColor, grayText } = useDisplayHooks();
@@ -203,13 +169,13 @@ const Home = () => {
             I'm Experienced in building pixel-perfect frontend application and server side
             applications. I'm passionate about sharing my experience in my career, and also some
             technologies/concept that i believe can help someone out there. When i'm not working or
-            learning something new , then i must be working out at the Gym, or pplaying video Games,
+            learning something new , then i must be working out at the Gym, or playing video Games,
             or watching Anime or any movie with superhero in it.
           </Text>
         </VStack>
       </HStack>
 
-      <HStack as='footer' justifyContent='end' my='1rem' px='1rem'>
+      <HStack as='footer' justifyContent='end' mt='1rem' px='1rem' mb={["5rem", "", "", "", ""]}>
         <Link to='/resume'>
           <HStack
             as='div'

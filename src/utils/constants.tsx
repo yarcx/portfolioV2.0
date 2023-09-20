@@ -1,3 +1,5 @@
+import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react-icons/bs";
+import { MdLocationPin } from "react-icons/md";
 import { RiBriefcaseLine, RiHomeHeartLine, RiMacLine, RiQuestionAnswerLine } from "react-icons/ri";
 
 export const BLACK_BG = "#000000";
@@ -73,5 +75,32 @@ export const articleList = [
     linkUrl: "https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/",
     firstParagraph:
       "React’s useEffect cleanup function saves applications from unwanted behaviors like memory leaks by cleaning up effects. In doing so, we can optimize our application’s performance.",
+  },
+];
+
+export const easyLinks = [
+  {
+    title: "Abuja Nigeria",
+    icon: <MdLocationPin />,
+  },
+  {
+    title: "Instagram",
+    icon: <BsInstagram />,
+  },
+  {
+    title: "Github",
+    icon: <BsGithub />,
+  },
+  {
+    title: "LinkedIn",
+    icon: <BsLinkedin />,
+  },
+  {
+    title: "Twitter",
+    icon: <BsTwitter />,
+  },
+  {
+    title: "09033872114",
+    icon: <BsTelephone />,
   },
 ];

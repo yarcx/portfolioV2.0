@@ -1,4 +1,4 @@
-import { Box, HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
+import { HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { GiNightSky } from "react-icons/gi";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -6,9 +6,11 @@ import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { DARK_MODE, HOME, LIGHT_MODE, PageLink } from "../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import MobileSidebar from "./MobileSidebar";
+import useDisplayHooks from "../hooks/useDisplayHooks";
 
 const PageInfoHeader = () => {
   const { colorMode, setColorMode } = useColorMode();
+  const { bgColor } = useDisplayHooks();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
@@ -16,8 +18,19 @@ const PageInfoHeader = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
-    <Box>
-      <HStack as='header' justifyContent='space-between' p={3}>
+    <>
+      <HStack
+        as='header'
+        justifyContent='space-between'
+        p={3}
+        pos='sticky'
+        top='0'
+        w='100%'
+        bg={bgColor}
+        zIndex={10}
+        bgBlendMode='color-burn'
+        opacity='.9'
+      >
         <HStack as='div'>
           {currentPage !== HOME && (
             <IconButton
@@ -59,7 +72,7 @@ const PageInfoHeader = () => {
         )}
       </HStack>
       <MobileSidebar isOpen={isOpen} onClose={onClose} />
-    </Box>
+    </>
   );
 };
 

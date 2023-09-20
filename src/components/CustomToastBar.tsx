@@ -2,7 +2,7 @@ import { Box, Text, useToast } from "@chakra-ui/react";
 import { MdCheckCircle, MdOutlineClose } from "react-icons/md";
 import useUiContext from "../hooks/useUiContext";
 
-const CustomToastBar = ({ title }: { title: string }) => {
+const CustomToastBar = ({ title, status }: { title: string; status?: string }) => {
   const {
     state: { uiColor },
   } = useUiContext();
@@ -15,7 +15,7 @@ const CustomToastBar = ({ title }: { title: string }) => {
       alignItems='center'
       rounded='md'
       p={3}
-      bg={uiColor}
+      bg={status ? "red.400" : uiColor}
       position='relative'
     >
       <MdCheckCircle />

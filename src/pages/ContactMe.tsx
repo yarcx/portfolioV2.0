@@ -1,4 +1,4 @@
-import { Box, Button, FormErrorMessage, Input, Textarea, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Input, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
@@ -61,7 +61,14 @@ const ContactMe = () => {
       });
       reset();
     } catch (error) {
-      console.log(error, "if error submision");
+      toast({
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        variant: "top-accent",
+        position: "top",
+        render: () => <CustomToastBar title={"Something went wrong."} status='error' />,
+      });
     }
   };
 
@@ -88,10 +95,10 @@ const ContactMe = () => {
             bg={displayUiBg}
             type='text'
             size='md'
-            errorBorderColor='red.600'
+            errorBorderColor='crimson'
             {...register("name", { required: { value: true, message: "Name field is required" } })}
           />
-          {errors.name && <FormErrorMessage>Name is required.</FormErrorMessage>}
+          {errors.name && <Text color='crimson'>{errors.name.message}</Text>}
         </VStack>
         <VStack align='start' w='full' mb='1rem'>
           <Input
@@ -106,11 +113,10 @@ const ContactMe = () => {
             })}
           />
 
-          {errors["email"] && <FormErrorMessage>Name is required.</FormErrorMessage>}
+          {errors["email"] && <Text color='crimson'>{errors.email.message}</Text>}
         </VStack>
         <VStack align='start' w='full' mb='1rem'>
           <Textarea
-            _active={{ borderColor: uiColor, outline: uiColor }}
             focusBorderColor={uiColor}
             placeholder='Your Message'
             bg={displayUiBg}
@@ -118,9 +124,10 @@ const ContactMe = () => {
             {...register("message", {
               required: { value: true, message: "Messages field is required" },
             })}
+            errorBorderColor='crimson'
           />
 
-          {errors["message"] && <FormErrorMessage>Message is required.</FormErrorMessage>}
+          {errors["message"] && <Text color='crimson'>{errors?.message?.message}</Text>}
         </VStack>
         <VStack align='start' w='full' mb='1rem'>
           <Button
