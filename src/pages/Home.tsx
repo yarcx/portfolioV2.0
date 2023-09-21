@@ -138,13 +138,14 @@ const Home = () => {
         borderBottom='1px solid'
         alignItems='stretch'
         borderColor={borderColor}
-        py='.4rem'
+        pt='.5rem'
+        pb='2rem'
         px='1rem'
       >
         <VStack width='60%' justifyContent='start' alignItems='center'>
           <MdPersonPinCircle />
 
-          <Box>
+          <Box minW='50px'>
             <Image
               boxSize={["50px", "60px"]}
               rounded='full'
@@ -161,7 +162,7 @@ const Home = () => {
           </Box>
         </VStack>
         <VStack alignItems='start'>
-          <Text fontWeight='medium' fontSize='sm'>
+          <Text fontWeight='medium' fontSize='sm' pt='0' mt='0'>
             About Me
           </Text>
           <Text fontWeight='normal' fontSize='sm'>

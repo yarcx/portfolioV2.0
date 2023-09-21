@@ -10,13 +10,13 @@ import { getFirestore } from "firebase/firestore";
 
 // DOnt forget to move these guys to your env file
 const firebaseConfig = {
-  apiKey: "AIzaSyB7Xgjx1d3b9BeHfb7cC7_ZHMbnhKSRxzw",
-  authDomain: "portfolio-9a8cb.firebaseapp.com",
-  projectId: "portfolio-9a8cb",
-  storageBucket: "portfolio-9a8cb.appspot.com",
-  messagingSenderId: "761788317562",
-  appId: "1:761788317562:web:fe29dac04545bed52fa0c3",
-  measurementId: "G-5EX9E9E471",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
