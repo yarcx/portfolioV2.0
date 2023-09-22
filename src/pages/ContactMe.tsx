@@ -3,7 +3,13 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  QueryDocumentSnapshot,
+  DocumentData,
+} from "firebase/firestore";
 import { db } from "../db.config/firebase";
 import { useEffect, useState } from "react";
 import CustomToastBar from "../components/CustomToastBar";
@@ -28,8 +34,9 @@ const ContactMe = () => {
     const getTodo = async () => {
       try {
         const todo = await getDocs(collectionRef);
-        console.log({ todo });
-        const todoData = todo.docs.map((doc) => ({ ...doc.data() }));
+        const todoData = todo.docs.map(
+          (doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({ ...doc.data() })
+        );
         setMessages(todoData as IMessageField[]);
       } catch (err) {
         console.log(err);

@@ -1,27 +1,27 @@
 import { Box, Image, Stack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
-import { pdfjs, Document, Page } from "react-pdf";
+// import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 import { useState } from "react";
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.js",
-  import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "pdfjs-dist/build/pdf.worker.min.js",
+//   import.meta.url
+// ).toString();
 
-const options = {
-  cMapUrl: "/cmaps/",
-  standardFontDataUrl: "/standard_fonts/",
-};
+// const options = {
+//   cMapUrl: "/cmaps/",
+//   standardFontDataUrl: "/standard_fonts/",
+// };
 
 const resume = "./resume.pdf";
 
 type PDFFile = string | File | null;
 
 const Resume = () => {
-  const [file, setFile] = useState<PDFFile>(resume);
+  const [, setFile] = useState<PDFFile>(resume);
 
   function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const { files } = event.target;
@@ -37,9 +37,9 @@ const Resume = () => {
       <PageInfoHeader />
       <Stack>
         <Image src='./avatar.jpeg' alt='ing' />
-        <Document onLoadError={console.error} options={options} file={file}>
+        {/* <Document onLoadError={console.error} options={options} file={file}>
           <Page pageNumber={1} />
-        </Document>
+        </Document> */}
       </Stack>
     </Box>
   );
