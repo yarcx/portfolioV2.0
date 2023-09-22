@@ -3,16 +3,16 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  QueryDocumentSnapshot,
-  DocumentData,
-} from "firebase/firestore";
 import { db } from "../db.config/firebase";
 import { useEffect, useState } from "react";
 import CustomToastBar from "../components/CustomToastBar";
+import {
+  DocumentData,
+  QueryDocumentSnapshot,
+  addDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore/lite";
 
 type IMessageField = {
   name: string;
