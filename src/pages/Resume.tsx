@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Stack } from "@chakra-ui/react";
+import { Box, Button, HStack, Stack, Text, Tooltip, VStack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -6,6 +6,8 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 
 import { FC, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import useDisplayHooks from "../hooks/useDisplayHooks";
+import ReactLoading from "react-loading";
 
 type PDFFile = string | File | null;
 const resume = "./resume.pdf";
@@ -15,11 +17,20 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const Resume = () => {
   const [file] = useState<PDFFile>(resume);
+  const { borderColor } = useDisplayHooks();
 
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />
-      <Stack justifyContent='center' overflowX='scroll' pb={["5rem", "", "", "0"]}>
+      <Stack
+        justifyContent='center'
+        overflowX='scroll'
+        borderTop='.6px solid'
+        borderColor={borderColor}
+        alignItems='center'
+        as='section'
+        pb={["5rem", "", "", "0"]}
+      >
         <PDFViewer file={file as string} />
       </Stack>
     </Box>
@@ -48,6 +59,12 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
       <Document
         file={file} // Replace with your PDF file URL or import
         onLoadSuccess={onDocumentLoadSuccess}
+        loading={
+          <VStack justify='center'>
+            <ReactLoading type='bars' color='#fff' />
+            <Text textAlign='center'>Loading Resume...</Text>
+          </VStack>
+        }
       >
         <Page pageNumber={pageNumber} />
       </Document>
@@ -63,9 +80,11 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
         >
           <AiOutlineLeft />
         </Button>
-        <Button rounded='none' p='0' display='flex' alignItems='center' justifyContent='center'>
-          {pageNumber} / {numPages}
-        </Button>
+        <Tooltip label='Active Page / Total Page'>
+          <Button rounded='none' p='0' display='flex' alignItems='center' justifyContent='center'>
+            {pageNumber} / {numPages}
+          </Button>
+        </Tooltip>
         <Button
           onClick={gotoNext}
           roundedLeft='none'
