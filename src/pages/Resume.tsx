@@ -7,21 +7,14 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 import { FC, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
+type PDFFile = string | File | null;
 const resume = "./resume.pdf";
 
-type PDFFile = string | File | null;
+// Set the worker URL for pdf.js
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const Resume = () => {
-  const [file, setFile] = useState<PDFFile>(resume);
-
-  function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    const { files } = event.target;
-
-    if (files && files[0]) {
-      setFile(files[0] || null);
-    }
-  }
-  console.log("🚀 ~ file: Resume.tsx:6 ~ resume:", resume, onFileChange);
+  const [file] = useState<PDFFile>(resume);
 
   return (
     <Box as='main' w='full'>
@@ -34,9 +27,6 @@ const Resume = () => {
 };
 
 export default Resume;
-
-// Set the worker URL for pdf.js
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export const PDFViewer: FC<{ file: string }> = ({ file }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
