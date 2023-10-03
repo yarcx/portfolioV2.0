@@ -1,27 +1,18 @@
-import { Box, Image, Stack } from "@chakra-ui/react";
+import { Box, Button, HStack, Stack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
-// import { pdfjs, Document, Page } from "react-pdf";
+import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
-import { useState } from "react";
-
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.js",
-//   import.meta.url
-// ).toString();
-
-// const options = {
-//   cMapUrl: "/cmaps/",
-//   standardFontDataUrl: "/standard_fonts/",
-// };
+import { FC, useState } from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const resume = "./resume.pdf";
 
 type PDFFile = string | File | null;
 
 const Resume = () => {
-  const [, setFile] = useState<PDFFile>(resume);
+  const [file, setFile] = useState<PDFFile>(resume);
 
   function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const { files } = event.target;
@@ -35,14 +26,67 @@ const Resume = () => {
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />
-      <Stack>
-        <Image src='./avatar.jpeg' alt='ing' />
-        {/* <Document onLoadError={console.error} options={options} file={file}>
-          <Page pageNumber={1} />
-        </Document> */}
+      <Stack justifyContent='center' overflowX='scroll' pb={["5rem", "", "", "0"]}>
+        <PDFViewer file={file as string} />
       </Stack>
     </Box>
   );
 };
 
 export default Resume;
+
+// Set the worker URL for pdf.js
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+export const PDFViewer: FC<{ file: string }> = ({ file }) => {
+  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+  };
+
+  const gotoNext = () => {
+    setPageNumber((prev) => (prev === numPages ? prev : prev + 1));
+  };
+  const gotoPrev = () => {
+    setPageNumber((prev) => (prev !== 1 ? prev - 1 : 1));
+  };
+
+  return (
+    <>
+      <Document
+        file={file} // Replace with your PDF file URL or import
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+
+      <HStack gap='0' justify='center'>
+        <Button
+          p='0'
+          roundedRight='none'
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+          onClick={gotoPrev}
+        >
+          <AiOutlineLeft />
+        </Button>
+        <Button rounded='none' p='0' display='flex' alignItems='center' justifyContent='center'>
+          {pageNumber} / {numPages}
+        </Button>
+        <Button
+          onClick={gotoNext}
+          roundedLeft='none'
+          p='0'
+          display='flex'
+          alignItems='center'
+          justifyContent='center'
+        >
+          <AiOutlineRight />
+        </Button>
+      </HStack>
+    </>
+  );
+};

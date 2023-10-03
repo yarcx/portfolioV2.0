@@ -89,7 +89,8 @@ const Layout = () => {
               placeholder='Search recent reads'
             />
           </InputGroup>
-          <Box mt='2rem' bg={displayUiBg} rounded='lg' py='.5rem' px={".8rem"}>
+
+          <Box mt='2rem' bg={displayUiBg} rounded='lg' py='.5rem' h='90%' px={".8rem"}>
             <Heading size='md' mb='1rem'>
               Recently read articles
             </Heading>
@@ -116,24 +117,27 @@ const Article = ({
   author,
   title,
   firstParagraph,
+  linkUrl,
 }: {
   author: string;
   title: string;
   firstParagraph: string;
-  linkUrl?: string;
+  linkUrl: string;
 }) => {
   const { grayText } = useDisplayHooks();
   return (
-    <Box my='1rem'>
-      <Text color={grayText} fontWeight='light'>
-        By {author}
-      </Text>
-      <Heading size='sm' my='1px'>
-        {title}
-      </Heading>
-      <Text fontWeight='normal' isTruncated>
-        {firstParagraph}
-      </Text>
-    </Box>
+    <Link target='_blank' to={linkUrl}>
+      <Box my='1rem'>
+        <Text color={grayText} fontWeight='light'>
+          By {author}
+        </Text>
+        <Heading size='sm' my='1px'>
+          {title}
+        </Heading>
+        <Text fontWeight='normal' isTruncated>
+          {firstParagraph}
+        </Text>
+      </Box>
+    </Link>
   );
 };
