@@ -12,6 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import { LIGHT_MODE, PageLink } from "../../utils/constants";
 import { ReactNode } from "react";
 import useUiContext from "../../hooks/useUiContext";
+import { Settings_Modal } from "../../context/UiDisplayContext";
 
 interface LinkButtonProps {
   link: string;
@@ -25,7 +26,7 @@ export const SideBarButtons = () => {
 
   const {
     state: { uiColor },
-    openSettingsModal,
+    openModal,
   } = useUiContext();
   return (
     <VStack align='flex-start' listStyleType='none' my='1rem' mx='0'>
@@ -53,7 +54,7 @@ export const SideBarButtons = () => {
         px='1rem'
         mt='.5rem'
         ml='.7rem'
-        onClick={() => openSettingsModal({ title: "Display Settings" })}
+        onClick={() => openModal(Settings_Modal, { title: "Display Settings" })}
       >
         Display Settings
       </Button>

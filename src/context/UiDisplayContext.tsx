@@ -2,8 +2,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import { createContext, useReducer, ReactElement, useMemo, useCallback } from "react";
 
 export const Change_Ui_Color = "Change_Ui_Color";
-const Settings_Modal = "Settings_Modal";
+export const Settings_Modal = "Settings_Modal";
 const Close_Modal = "Close_Modal";
+export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
 
 type IModalProps = {
   [key: string]: unknown;
@@ -26,15 +27,15 @@ const initialState: IState = {
 
 interface IUiDisplayContext {
   changeUiColor: (color: string) => void;
-  closeSettingsModal: () => void;
-  openSettingsModal: (data?: unknown) => void;
+  closeModal: () => void;
+  openModal: (type: string, data?: unknown) => void;
   state: IState;
 }
 
 export const UiDisplayContext = createContext<IUiDisplayContext>({
   changeUiColor: () => {},
-  closeSettingsModal: () => {},
-  openSettingsModal: () => {},
+  closeModal: () => {},
+  openModal: () => {},
   state: initialState,
 });
 
@@ -49,6 +50,13 @@ const reducer = (state: IState, action: { type: string; payload: unknown }) => {
         ...state,
         isModalOpen: true,
         modalType: Settings_Modal,
+        modalProps: action.payload,
+      };
+    case Post_As_Guest_Modal:
+      return {
+        ...state,
+        isModalOpen: true,
+        modalType: Post_As_Guest_Modal,
         modalProps: action.payload,
       };
     case Close_Modal:
@@ -70,14 +78,14 @@ const UiDisplayContextProvider = ({ children }: { children: ReactElement }) => {
     dispatch({ type: Change_Ui_Color, payload: color });
   };
 
-  const openSettingsModal = (modalData?: unknown) => {
+  const openModal = (type: string, modalData?: unknown) => {
     dispatch({
-      type: Settings_Modal,
+      type: type,
       payload: modalData,
     });
   };
 
-  const closeSettingsModal = useCallback(() => {
+  const closeModal = useCallback(() => {
     dispatch({
       type: Close_Modal,
       payload: {},
@@ -89,10 +97,10 @@ const UiDisplayContextProvider = ({ children }: { children: ReactElement }) => {
     () => ({
       state,
       changeUiColor,
-      openSettingsModal,
-      closeSettingsModal,
+      openModal,
+      closeModal,
     }),
-    [state, closeSettingsModal]
+    [state, closeModal]
   );
 
   return <UiDisplayContext.Provider value={values}>{children}</UiDisplayContext.Provider>;

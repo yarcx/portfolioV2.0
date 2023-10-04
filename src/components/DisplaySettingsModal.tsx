@@ -17,7 +17,7 @@ import { MdCheck } from "react-icons/md";
 const DisplaySettingsModal = () => {
   const {
     state: { modalProps, uiColor },
-    closeSettingsModal,
+    closeModal,
     changeUiColor,
   } = useUiContext();
   const { borderColor, displayUiBg, grayText } = useDisplayHooks();
@@ -139,7 +139,7 @@ const DisplaySettingsModal = () => {
             _hover={{ bg: uiColor, opacity: ".7" }}
             bg={uiColor}
             color='white'
-            onClick={closeSettingsModal}
+            onClick={closeModal}
           >
             Done
           </Button>

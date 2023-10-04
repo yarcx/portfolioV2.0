@@ -79,8 +79,6 @@ const ContactMe = () => {
     }
   };
 
-  console.log(errors.name);
-
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />

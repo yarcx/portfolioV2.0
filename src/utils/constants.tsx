@@ -1,6 +1,6 @@
 import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react-icons/bs";
 import { MdLocationPin } from "react-icons/md";
-import { RiBriefcaseLine, RiHomeHeartLine, RiMacLine, RiQuestionAnswerLine } from "react-icons/ri";
+import { RiBriefcaseLine, RiHomeHeartLine, RiQuestionAnswerLine } from "react-icons/ri";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 
 export const BLACK_BG = "#000000";
@@ -28,9 +28,11 @@ export const PageLink = [
   { link: HOME, route: HOME_LINK, icon: <RiHomeHeartLine size={20} /> },
   { link: RESUME, route: RESUME_LINK, icon: <RiBriefcaseLine size={20} /> },
   { link: GUESTBOOK, route: GUESTBOOK_LINK, icon: <HiOutlineChatBubbleLeftRight size={20} /> },
-  { link: PROJECT, route: PROJECT_LINK, icon: <RiMacLine size={20} /> },
+  // { link: PROJECT, route: PROJECT_LINK, icon: <RiMacLine size={20} /> },
   { link: CONTACT_ME, route: CONTACT_ME_LINK, icon: <RiQuestionAnswerLine size={20} /> },
 ];
+
+export const resume = "./resume.pdf";
 
 export const App_Ui_Colors = ["brand.100", "#FFD400", "#F9197F", "#7855FF", "#FF7900", "#00BA7C"];
 

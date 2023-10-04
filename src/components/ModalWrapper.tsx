@@ -2,15 +2,17 @@ import { Modal, ModalOverlay, ModalContent } from "@chakra-ui/react";
 import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import DisplaySettingsModal from "./DisplaySettingsModal";
+import GuestBookModal from "./GuestBookModal";
 
 const SelectedModal = {
   Settings_Modal: <DisplaySettingsModal />,
+  Post_As_Guest_Modal: <GuestBookModal />,
 };
 
 const ModalWrapper = () => {
   const {
     state: { isModalOpen, modalType },
-    closeSettingsModal,
+    closeModal,
   } = useUiContext();
   const { bgColor, borderColor } = useDisplayHooks();
 
@@ -18,8 +20,11 @@ const ModalWrapper = () => {
     <Modal
       size={["sm", "md", "md", "lg"]}
       isOpen={isModalOpen}
-      onClose={closeSettingsModal}
-      isCentered
+      onClose={closeModal}
+      isCentered={
+        SelectedModal[modalType as keyof typeof SelectedModal] !==
+        SelectedModal["Post_As_Guest_Modal"]
+      }
     >
       <ModalOverlay bg={"transparent"} backdropFilter='blur(1px) hue-rotate(10deg)' />
       <ModalContent bg={bgColor} border='1px solid' borderColor={borderColor}>
