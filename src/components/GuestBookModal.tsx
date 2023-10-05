@@ -6,21 +6,29 @@ import {
   ModalFooter,
   ModalHeader,
   VStack,
+  useToast,
   //   useColorMode,
 } from "@chakra-ui/react";
 import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
+import { addDoc } from "firebase/firestore/lite";
+import { Iguestbook, IuserInfo, guestCollectionRef } from "../pages/Guestbook";
+import CustomToastBar from "./CustomToastBar";
 // import useUiContext from "../hooks/useUiContext";
 // import useDisplayHooks from "../hooks/useDisplayHooks";
 
 const GuestBookModal = () => {
   const { displayUiBg } = useDisplayHooks();
   const {
-    state: { uiColor, modalProps },
+    state: {
+      uiColor,
+      modalProps: { user },
+    },
     closeModal,
   } = useUiContext();
+  const toast = useToast();
 
   const {
     register,
@@ -31,12 +39,37 @@ const GuestBookModal = () => {
 
   // const { colorMode } = useColorMode();
 
-  const setMsgs = modalProps?.setMsgs as React.Dispatch<React.SetStateAction<string[]>>;
+  //   const setMsgs = modalProps?.setMsgs as React.Dispatch<React.SetStateAction<string[]>>;
 
   const onSubmit = async ({ message }: { message: string }) => {
-    setMsgs((prev: string[]) => [...prev, message]);
-    reset();
-    closeModal();
+    const data: Iguestbook = { message, ...(user as IuserInfo) };
+    try {
+      await addDoc(guestCollectionRef, data);
+      toast({
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        variant: "top-accent",
+        position: "top",
+        render: () => <CustomToastBar title={"Message Submitted"} />,
+      });
+      reset();
+      closeModal();
+    } catch (error) {
+      toast({
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        variant: "top-accent",
+        position: "top",
+        render: () => <CustomToastBar title={"Something went wrong"} />,
+      });
+    }
+    // setMsgs((prev: string[]) => [...prev, message]);
+    // reset();
+    // closeModal();
+
+    console.log({ message, user: user });
   };
 
   return (

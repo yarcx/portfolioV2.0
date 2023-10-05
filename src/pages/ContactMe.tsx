@@ -30,18 +30,19 @@ const ContactMe = () => {
 
   const collectionRef = collection(db, "messages");
 
+  const getTodo = async () => {
+    try {
+      const todo = await getDocs(collectionRef);
+      const todoData = todo.docs.map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
+        ...doc.data(),
+      }));
+      setMessages(todoData as IMessageField[]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const getTodo = async () => {
-      try {
-        const todo = await getDocs(collectionRef);
-        const todoData = todo.docs.map(
-          (doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({ ...doc.data() })
-        );
-        setMessages(todoData as IMessageField[]);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     getTodo();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,8 +57,7 @@ const ContactMe = () => {
 
   const onSubmit: SubmitHandler<IMessageField> = async (data) => {
     try {
-      const res = await addDoc(collectionRef, data);
-      console.log(res, "After submision");
+      await addDoc(collectionRef, data);
       toast({
         status: "success",
         duration: 3000,

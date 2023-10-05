@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react-icons/bs";
 import { MdLocationPin } from "react-icons/md";
 import { RiBriefcaseLine, RiHomeHeartLine, RiQuestionAnswerLine } from "react-icons/ri";
