@@ -14,12 +14,13 @@ import useDisplayHooks from "../hooks/useDisplayHooks";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
 import { addDoc } from "firebase/firestore/lite";
-import { Iguestbook, IuserInfo, guestCollectionRef } from "../pages/Guestbook";
+import { Iguestbook, IuserInfo } from "../pages/Guestbook";
 import CustomToastBar from "./CustomToastBar";
-// import useUiContext from "../hooks/useUiContext";
-// import useDisplayHooks from "../hooks/useDisplayHooks";
+import { useState } from "react";
+import { guestCollectionRef } from "../utils/constants";
 
 const GuestBookModal = () => {
+  const [submittingPost, setSubmittingPost] = useState(false);
   const { displayUiBg } = useDisplayHooks();
   const {
     state: {
@@ -30,19 +31,11 @@ const GuestBookModal = () => {
   } = useUiContext();
   const toast = useToast();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { isLoading, errors, isSubmitting },
-  } = useForm<{ message: "" }>();
-
-  // const { colorMode } = useColorMode();
-
-  //   const setMsgs = modalProps?.setMsgs as React.Dispatch<React.SetStateAction<string[]>>;
+  const { register, handleSubmit, reset } = useForm<{ message: "" }>();
 
   const onSubmit = async ({ message }: { message: string }) => {
-    const data: Iguestbook = { message, ...(user as IuserInfo) };
+    setSubmittingPost(true);
+    const data: Iguestbook = { message, createdAt: new Date().getTime(), ...(user as IuserInfo) };
     try {
       await addDoc(guestCollectionRef, data);
       toast({
@@ -62,14 +55,11 @@ const GuestBookModal = () => {
         isClosable: true,
         variant: "top-accent",
         position: "top",
-        render: () => <CustomToastBar title={"Something went wrong"} />,
+        render: () => <CustomToastBar status='error' title={"Something went wrong"} />,
       });
+    } finally {
+      setSubmittingPost(false);
     }
-    // setMsgs((prev: string[]) => [...prev, message]);
-    // reset();
-    // closeModal();
-
-    console.log({ message, user: user });
   };
 
   return (
@@ -104,6 +94,8 @@ const GuestBookModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             type='submit'
+            isLoading={submittingPost}
+            disabled={submittingPost}
           >
             Submit Message
           </Button>

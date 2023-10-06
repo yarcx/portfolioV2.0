@@ -3,6 +3,8 @@ import { BsGithub, BsInstagram, BsLinkedin, BsTelephone, BsTwitter } from "react
 import { MdLocationPin } from "react-icons/md";
 import { RiBriefcaseLine, RiHomeHeartLine, RiQuestionAnswerLine } from "react-icons/ri";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
+import { collection } from "firebase/firestore/lite";
+import { db } from "../db.config/firebase";
 
 export const BLACK_BG = "#000000";
 export const WHITE_BG = "#FFFFFF";
@@ -110,3 +112,5 @@ export const easyLinks = [
     icon: <BsTelephone />,
   },
 ];
+
+export const guestCollectionRef = collection(db, "guestbook");

@@ -1,20 +1,15 @@
-import { Avatar, Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
+import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { FaGithub } from "react-icons/fa";
-import { LIGHT_MODE } from "../utils/constants";
+import { LIGHT_MODE, guestCollectionRef } from "../utils/constants";
 import useUiContext from "../hooks/useUiContext";
 import { Post_As_Guest_Modal } from "../context/UiDisplayContext";
 import { useEffect, useState } from "react";
-import { auth, db, provider } from "../db.config/firebase";
+import { auth, provider } from "../db.config/firebase";
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import {
-  DocumentData,
-  QueryDocumentSnapshot,
-  // addDoc,
-  collection,
-  getDocs,
-} from "firebase/firestore/lite";
+import { DocumentData, QueryDocumentSnapshot, getDocs } from "firebase/firestore/lite";
+import GuestBookRow from "../components/GuestBookRow";
 
 export interface IuserInfo {
   displayName: string;
@@ -23,11 +18,14 @@ export interface IuserInfo {
 }
 export interface Iguestbook extends IuserInfo {
   message: string;
+  createdAt?: number;
 }
-export const guestCollectionRef = collection(db, "guestbook");
 
 const Guestbook = () => {
-  const { openModal } = useUiContext();
+  const {
+    openModal,
+    state: { isModalOpen },
+  } = useUiContext();
   const { borderColor } = useDisplayHooks();
   const { colorMode } = useColorMode();
   const [user, setUser] = useState<IuserInfo | null>(null);
@@ -45,12 +43,17 @@ const Guestbook = () => {
 
   const getGuestBooks = async () => {
     const res = await getDocs(guestCollectionRef);
-    const guestbook = res.docs.map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
-      ...doc.data(),
-    })) as Iguestbook[];
+    const guestbook = res.docs
+      .map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
+        ...doc.data(),
+      }))
+      .sort((a, b) => b?.createdAt - a?.createdAt) as Iguestbook[];
     setMsgs(guestbook);
-    console.log(guestbook, "guestbook");
   };
+
+  useEffect(() => {
+    getGuestBooks();
+  }, [isModalOpen]);
 
   useEffect(() => {
     // Firebase event listener for authentication state changes
@@ -63,15 +66,12 @@ const Guestbook = () => {
       }
     });
 
-    getGuestBooks();
-
     return () => {
       // Clean up the listener when the component unmounts
       unsubscribe();
     };
   }, []);
 
-  console.log(user, "console.log");
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />
@@ -161,34 +161,13 @@ const Guestbook = () => {
         h={["", "", "", "", "80vh"]}
       >
         {msgs?.length
-          ? msgs?.map(({ message, displayName, photoURL, uid }) => (
-              <Box
-                key={uid}
-                mt='.5rem'
-                display='flex'
-                alignItems='self-start'
-                justifyContent='start'
-                border='.6px solid'
-                rounded='lg'
-                // borderTop='.6px solid'
-                // borderBottom='.6px solid'
-                borderColor={borderColor}
-                px='1rem'
-                py='.6rem'
-                gap='1rem'
-              >
-                <Box display='flex' alignItems='center'>
-                  <Avatar size='sm' name={displayName || "No Name"} src={photoURL || displayName} />
-                </Box>
-                <Box>
-                  <Text fontSize='md' fontWeight='semibold'>
-                    {displayName || "No Name"} .
-                  </Text>
-                  <Text fontSize='sm' fontWeight='normal'>
-                    {message}
-                  </Text>
-                </Box>
-              </Box>
+          ? msgs?.map(({ message, displayName, photoURL }, index) => (
+              <GuestBookRow
+                message={message}
+                displayName={displayName}
+                photoURL={photoURL}
+                key={index}
+              />
             ))
           : null}
       </Box>
