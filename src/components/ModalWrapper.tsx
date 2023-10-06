@@ -3,10 +3,12 @@ import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import DisplaySettingsModal from "./DisplaySettingsModal";
 import GuestBookModal from "./GuestBookModal";
+import SignUpModal from "./SignUpModal";
 
 const SelectedModal = {
   Settings_Modal: <DisplaySettingsModal />,
   Post_As_Guest_Modal: <GuestBookModal />,
+  SignUp_Modal: <SignUpModal />,
 };
 
 const ModalWrapper = () => {

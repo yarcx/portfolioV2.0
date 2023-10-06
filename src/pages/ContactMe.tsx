@@ -1,4 +1,4 @@
-import { Box, Button, Input, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, HStack, Input, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
@@ -13,11 +13,14 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore/lite";
+import { Link } from "react-router-dom";
+import { BsArrowBarRight } from "react-icons/bs";
 
 type IMessageField = {
   name: string;
   email: string;
   message: string;
+  createdAt?: number;
 };
 
 const ContactMe = () => {
@@ -57,7 +60,7 @@ const ContactMe = () => {
 
   const onSubmit: SubmitHandler<IMessageField> = async (data) => {
     try {
-      await addDoc(collectionRef, data);
+      await addDoc(collectionRef, { ...data, createdAt: new Date().getTime() });
       toast({
         status: "success",
         duration: 3000,
@@ -80,7 +83,7 @@ const ContactMe = () => {
   };
 
   return (
-    <Box as='main' w='full'>
+    <Box as='main' w='full' pos='relative'>
       <PageInfoHeader />
       <VStack
         borderTop='.6px solid'
@@ -151,6 +154,29 @@ const ContactMe = () => {
           </Button>
         </VStack>
       </VStack>
+
+      <HStack
+        as='footer'
+        pos='absolute'
+        bottom={0}
+        justifyContent='end'
+        mt='1rem'
+        px='1rem'
+        mb={["5rem", "", "", "", ""]}
+        w='100%'
+      >
+        <Link to='/'>
+          <HStack
+            as='div'
+            align='center'
+            transition='all 0.3s ease-in'
+            _hover={{ textDecor: "underline" }}
+          >
+            <Text>Go back Home</Text>
+            <BsArrowBarRight />
+          </HStack>
+        </Link>
+      </HStack>
     </Box>
   );
 };

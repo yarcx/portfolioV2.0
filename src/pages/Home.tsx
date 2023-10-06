@@ -167,11 +167,11 @@ const Home = () => {
           </Text>
           <Text fontWeight='normal' fontSize='sm'>
             Hello there! I'm Hassan Yaqub . A Software Engineer & Technical Writer Based in Nigeria.
-            I'm Experienced in building pixel-perfect frontend application and server side
-            applications. I'm passionate about sharing my experience in my career, and also some
-            technologies/concept that i believe can help someone out there. When i'm not working or
-            learning something new , then i must be working out at the Gym, or playing video Games,
-            or watching Anime or any movie with superhero in it.
+            I'm Experienced in building pixel-perfect Frontend application and server side
+            applications (Backend). I'm passionate about sharing my experience in my career, and
+            also some technologies/concept that i believe can help someone out there. When i'm not
+            working or learning something new , then i must be working out at the Gym, or playing
+            video Games, or watching Anime or any movie with superhero in it.
           </Text>
         </VStack>
       </HStack>
@@ -184,7 +184,7 @@ const Home = () => {
             transition='all 0.3s ease-in'
             _hover={{ textDecor: "underline" }}
           >
-            <Text>Check out resume</Text>
+            <Text>Check out my resume</Text>
             <BsArrowBarRight />
           </HStack>
         </Link>

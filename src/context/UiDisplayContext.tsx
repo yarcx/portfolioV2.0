@@ -5,6 +5,7 @@ export const Change_Ui_Color = "Change_Ui_Color";
 export const Settings_Modal = "Settings_Modal";
 const Close_Modal = "Close_Modal";
 export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
+export const SignUp_Modal = "SignUp_Modal";
 
 type IModalProps = {
   [key: string]: unknown;
@@ -57,6 +58,13 @@ const reducer = (state: IState, action: { type: string; payload: unknown }) => {
         ...state,
         isModalOpen: true,
         modalType: Post_As_Guest_Modal,
+        modalProps: action.payload,
+      };
+    case SignUp_Modal:
+      return {
+        ...state,
+        isModalOpen: true,
+        modalType: SignUp_Modal,
         modalProps: action.payload,
       };
     case Close_Modal:
