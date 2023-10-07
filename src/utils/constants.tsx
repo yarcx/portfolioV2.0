@@ -114,3 +114,9 @@ export const easyLinks = [
 ];
 
 export const guestCollectionRef = collection(db, "guestbook");
+
+export const Change_Ui_Color = "Change_Ui_Color";
+export const Settings_Modal = "Settings_Modal";
+export const Close_Modal = "Close_Modal";
+export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
+export const SignUp_Modal = "SignUp_Modal";

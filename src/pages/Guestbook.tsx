@@ -2,24 +2,14 @@ import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { FaGithub } from "react-icons/fa";
-import { LIGHT_MODE, guestCollectionRef } from "../utils/constants";
+import { LIGHT_MODE, Post_As_Guest_Modal, guestCollectionRef } from "../utils/constants";
 import useUiContext from "../hooks/useUiContext";
-import { Post_As_Guest_Modal } from "../context/UiDisplayContext";
 import { useEffect, useState } from "react";
 import { auth, provider } from "../db.config/firebase";
 import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { DocumentData, QueryDocumentSnapshot, getDocs } from "firebase/firestore/lite";
 import GuestBookRow from "../components/GuestBookRow";
-
-export interface IuserInfo {
-  displayName: string;
-  uid: string;
-  photoURL: string;
-}
-export interface Iguestbook extends IuserInfo {
-  message: string;
-  createdAt?: number;
-}
+import { Iguestbook, IuserInfo } from "../utils/types";
 
 const Guestbook = () => {
   const {

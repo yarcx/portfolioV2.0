@@ -1,21 +1,13 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { createContext, useReducer, ReactElement, useMemo, useCallback } from "react";
-
-export const Change_Ui_Color = "Change_Ui_Color";
-export const Settings_Modal = "Settings_Modal";
-const Close_Modal = "Close_Modal";
-export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
-export const SignUp_Modal = "SignUp_Modal";
-
-type IModalProps = {
-  [key: string]: unknown;
-};
-export interface IState {
-  uiColor: string;
-  isModalOpen: boolean;
-  modalType: string;
-  modalProps: IModalProps;
-}
+import {
+  Change_Ui_Color,
+  Close_Modal,
+  Post_As_Guest_Modal,
+  Settings_Modal,
+  SignUp_Modal,
+} from "../utils/constants";
+import { IState } from "../utils/types";
 
 const initialState: IState = {
   uiColor: localStorage.getItem("uiColor")
