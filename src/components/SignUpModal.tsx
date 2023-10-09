@@ -16,7 +16,12 @@ const SignUpModal = () => {
         Select a Sign up Socials
       </ModalHeader>
       <ModalFooter>
-        <HStack justifyContent='space-between' align='center' w='full' flexWrap={"wrap-reverse"}>
+        <HStack
+          justifyContent='space-between'
+          alignItems='center'
+          w='full'
+          flexWrap={"wrap-reverse"}
+        >
           <Button
             color={colorMode !== LIGHT_MODE ? "white" : "black"}
             size='md'
