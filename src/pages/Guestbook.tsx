@@ -1,15 +1,23 @@
 import { Box, Button, HStack, Text, useColorMode } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
-import { FaGithub } from "react-icons/fa";
-import { LIGHT_MODE, Post_As_Guest_Modal, guestCollectionRef } from "../utils/constants";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import {
+  LIGHT_MODE,
+  Post_As_Guest_Modal,
+  SignUp_Modal,
+  guestCollectionRef,
+  providers,
+} from "../utils/constants";
 import useUiContext from "../hooks/useUiContext";
 import { useEffect, useState } from "react";
-import { auth, provider } from "../db.config/firebase";
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from "../db.config/firebase";
+import { signOut } from "firebase/auth";
 import { DocumentData, QueryDocumentSnapshot, getDocs } from "firebase/firestore/lite";
 import GuestBookRow from "../components/GuestBookRow";
-import { Iguestbook, IuserInfo } from "../utils/types";
+import { IGuestbook } from "../utils/types";
+import useAuthContext from "../hooks/useAuthContext";
+import LoadingComponent from "../components/LoadingComponent";
 
 const Guestbook = () => {
   const {
@@ -18,49 +26,39 @@ const Guestbook = () => {
   } = useUiContext();
   const { borderColor } = useDisplayHooks();
   const { colorMode } = useColorMode();
-  const [user, setUser] = useState<IuserInfo | null>(null);
-  const [msgs, setMsgs] = useState<Iguestbook[]>([]);
 
-  const signInWithGitHub = async () => {
-    try {
-      const response = await signInWithPopup(auth, provider);
-      const { displayName, uid, photoURL } = response.user;
-      setUser({ displayName, uid, photoURL } as IuserInfo);
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  const [msgs, setMsgs] = useState<IGuestbook[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuthContext();
 
   const getGuestBooks = async () => {
-    const res = await getDocs(guestCollectionRef);
-    const guestbook = res.docs
-      .map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
-        ...doc.data(),
-      }))
-      .sort((a, b) => b?.createdAt - a?.createdAt) as Iguestbook[];
-    setMsgs(guestbook);
+    try {
+      setIsLoading(true);
+      const res = await getDocs(guestCollectionRef);
+      const guestbook = res.docs
+        .map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
+          ...doc.data(),
+        }))
+        .sort((a, b) => b?.createdAt - a?.createdAt) as IGuestbook[];
+      setMsgs(guestbook);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
     getGuestBooks();
   }, [isModalOpen]);
 
-  useEffect(() => {
-    // Firebase event listener for authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        const { displayName, uid, photoURL } = authUser;
-        setUser({ displayName, uid, photoURL } as IuserInfo);
-      } else {
-        setUser(null);
-      }
-    });
+  const msgContent = msgs?.length
+    ? msgs?.map(({ message, displayName, photoURL }, index) => (
+        <GuestBookRow message={message} displayName={displayName} photoURL={photoURL} key={index} />
+      ))
+    : null;
 
-    return () => {
-      // Clean up the listener when the component unmounts
-      unsubscribe();
-    };
-  }, []);
+  const loadingJsx = <LoadingComponent text='Messages' />;
 
   return (
     <Box as='main' w='full'>
@@ -109,7 +107,7 @@ const Guestbook = () => {
                 py='.6rem'
                 px='1rem'
                 fontSize='lg'
-                leftIcon={<FaGithub />}
+                leftIcon={user?.provider === providers["github.com"] ? <FaGithub /> : <FaGoogle />}
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
                 onClick={() => {
@@ -126,14 +124,14 @@ const Guestbook = () => {
                 py='.6rem'
                 px='1rem'
                 fontSize='lg'
-                leftIcon={<FaGithub />}
+                // leftIcon={<FaGithub />}
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
                 onClick={() => {
-                  signInWithGitHub();
+                  openModal(SignUp_Modal);
                 }}
               >
-                Sign in with Github
+                Sign in to post
               </Button>
             )}
           </>
@@ -150,16 +148,7 @@ const Guestbook = () => {
         overflowY='auto'
         h={["", "", "", "", "80vh"]}
       >
-        {msgs?.length
-          ? msgs?.map(({ message, displayName, photoURL }, index) => (
-              <GuestBookRow
-                message={message}
-                displayName={displayName}
-                photoURL={photoURL}
-                key={index}
-              />
-            ))
-          : null}
+        {isLoading ? loadingJsx : msgContent}
       </Box>
     </Box>
   );

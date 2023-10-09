@@ -32,6 +32,7 @@ const GuestBookRow = ({
           size='sm'
           name={displayName}
           icon={<AiOutlineUser fontSize='1.5rem' src={photoURL} />}
+          src={photoURL}
         />
       </Box>
       <Box>

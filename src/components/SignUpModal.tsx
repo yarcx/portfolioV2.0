@@ -1,20 +1,14 @@
 import { Button, HStack, ModalFooter, ModalHeader, useColorMode } from "@chakra-ui/react";
 import { LIGHT_MODE } from "../utils/constants";
 import { FaGithub, FaGoogle } from "react-icons/fa";
-import { signInWithGitHub } from "../utils/actions";
+import useAuthContext from "../hooks/useAuthContext";
+import useUiContext from "../hooks/useUiContext";
+import { githubProvider, googleProvider } from "../db.config/firebase";
 
 const SignUpModal = () => {
   const { colorMode } = useColorMode();
-
-  //  const signInWithGitHub = async () => {
-  //    try {
-  //      const response = await signInWithPopup(auth, provider);
-  //      const { displayName, uid, photoURL } = response.user;
-  //      setUser({ displayName, uid, photoURL } as IuserInfo);
-  //    } catch (error) {
-  //      console.log("error", error);
-  //    }
-  //  };
+  const { signInWithGitHub } = useAuthContext();
+  const { closeModal } = useUiContext();
 
   return (
     <>
@@ -36,7 +30,8 @@ const SignUpModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             onClick={() => {
-              alert("This is a work in progress");
+              signInWithGitHub(googleProvider);
+              closeModal();
             }}
           >
             Sign in with Google
@@ -53,7 +48,8 @@ const SignUpModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             onClick={() => {
-              signInWithGitHub();
+              signInWithGitHub(githubProvider);
+              closeModal();
             }}
           >
             Sign in with Github

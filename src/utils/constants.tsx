@@ -120,3 +120,8 @@ export const Settings_Modal = "Settings_Modal";
 export const Close_Modal = "Close_Modal";
 export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
 export const SignUp_Modal = "SignUp_Modal";
+
+export const providers = {
+  "github.com": "github.com",
+  "google.com": "google.com",
+};

@@ -1,13 +1,13 @@
-import { Box, Button, HStack, Text, Tooltip, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Tooltip } from "@chakra-ui/react";
 import { pdfjs, Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-
 import { FC, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import ReactLoading from "react-loading";
 // Set the worker URL for pdf.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+import LoadingComponent from "./LoadingComponent";
 
 export const PDFViewer: FC<{ file: string }> = ({ file }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
@@ -28,12 +28,7 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
       <Document
         file={file} // Replace with your PDF file URL or import
         onLoadSuccess={onDocumentLoadSuccess}
-        loading={
-          <VStack justify='center'>
-            <ReactLoading type='bars' color='#fff' />
-            <Text textAlign='center'>Loading Resume...</Text>
-          </VStack>
-        }
+        loading={<LoadingComponent />}
       >
         <Page pageNumber={pageNumber} />
       </Document>

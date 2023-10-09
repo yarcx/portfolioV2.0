@@ -8,12 +8,13 @@ export interface IState {
   modalProps: IModalProps;
 }
 
-export interface IuserInfo {
+export interface IUserInfo {
   displayName: string;
   uid: string;
   photoURL: string;
+  provider?: string;
 }
-export interface Iguestbook extends IuserInfo {
+export interface IGuestbook extends IUserInfo {
   message: string;
   createdAt?: number;
 }

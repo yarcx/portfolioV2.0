@@ -17,7 +17,7 @@ import { addDoc } from "firebase/firestore/lite";
 import CustomToastBar from "./CustomToastBar";
 import { useState } from "react";
 import { guestCollectionRef } from "../utils/constants";
-import { Iguestbook, IuserInfo } from "../utils/types";
+import { IGuestbook, IUserInfo } from "../utils/types";
 
 const GuestBookModal = () => {
   const [submittingPost, setSubmittingPost] = useState(false);
@@ -35,7 +35,7 @@ const GuestBookModal = () => {
 
   const onSubmit = async ({ message }: { message: string }) => {
     setSubmittingPost(true);
-    const data: Iguestbook = { message, createdAt: new Date().getTime(), ...(user as IuserInfo) };
+    const data: IGuestbook = { message, createdAt: new Date().getTime(), ...(user as IUserInfo) };
     try {
       await addDoc(guestCollectionRef, data);
       toast({
