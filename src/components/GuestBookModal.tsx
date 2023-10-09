@@ -14,10 +14,10 @@ import useDisplayHooks from "../hooks/useDisplayHooks";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
 import { addDoc } from "firebase/firestore/lite";
-import { Iguestbook, IuserInfo } from "../pages/Guestbook";
 import CustomToastBar from "./CustomToastBar";
 import { useState } from "react";
 import { guestCollectionRef } from "../utils/constants";
+import { Iguestbook, IuserInfo } from "../utils/types";
 
 const GuestBookModal = () => {
   const [submittingPost, setSubmittingPost] = useState(false);

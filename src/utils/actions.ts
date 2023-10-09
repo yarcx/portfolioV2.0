@@ -1,6 +1,7 @@
 // import { signInWithPopup } from "firebase/auth";
 // import { auth, provider } from "../db.config/firebase";
-import { IuserInfo } from "../pages/Guestbook";
+
+import { IuserInfo } from "./types";
 
 export const signInWithGitHub = async (
   setUser?: React.Dispatch<React.SetStateAction<IuserInfo | null>>

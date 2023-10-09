@@ -9,10 +9,9 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
-import { LIGHT_MODE, PageLink } from "../../utils/constants";
+import { LIGHT_MODE, PageLink, Settings_Modal } from "../../utils/constants";
 import { ReactNode } from "react";
 import useUiContext from "../../hooks/useUiContext";
-import { Settings_Modal } from "../../context/UiDisplayContext";
 
 interface LinkButtonProps {
   link: string;
