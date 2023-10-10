@@ -17,9 +17,10 @@ const SignUpModal = () => {
       </ModalHeader>
       <ModalFooter>
         <HStack
-          justifyContent='space-between'
+          justifyContent='center'
           alignItems='center'
           w='full'
+          gap='1rem'
           flexWrap={"wrap-reverse"}
         >
           <Button

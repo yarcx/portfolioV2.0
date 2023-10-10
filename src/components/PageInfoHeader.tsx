@@ -1,9 +1,9 @@
-import { HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
+import { Button, HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { GiNightSky } from "react-icons/gi";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
-import { DARK_MODE, HOME, LIGHT_MODE, PageLink } from "../utils/constants";
+import { DARK_MODE, HOME, LIGHT_MODE, PageLink, RESUME } from "../utils/constants";
 import { useLocation, useNavigate } from "react-router-dom";
 import MobileSidebar from "./MobileSidebar";
 import useDisplayHooks from "../hooks/useDisplayHooks";
@@ -16,6 +16,9 @@ const PageInfoHeader = () => {
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
 
   const { isOpen, onClose, onOpen } = useDisclosure();
+
+  const pdfDownloadLink =
+    "https://drive.google.com/file/d/121bz89M5namem-jx9GYxUnzLRKHi0o03/view?usp=sharing";
 
   return (
     <>
@@ -54,6 +57,14 @@ const PageInfoHeader = () => {
           />
           <Text>{currentPage || HOME}</Text>
         </HStack>
+
+        {currentPage === RESUME && (
+          <Button>
+            <a href={pdfDownloadLink} download='Hassan Resume'>
+              Download Resume
+            </a>
+          </Button>
+        )}
 
         {colorMode === LIGHT_MODE ? (
           <IconButton

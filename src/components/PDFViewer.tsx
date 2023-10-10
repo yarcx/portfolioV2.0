@@ -32,36 +32,43 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
       >
         <Page pageNumber={pageNumber} />
       </Document>
-      {/* Pagination Button */}
-      {numPages && (
-        <HStack gap='0' justify='center'>
-          <Button
-            p='0'
-            roundedRight='none'
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-            onClick={gotoPrev}
-          >
-            <AiOutlineLeft />
-          </Button>
-          <Tooltip label='Active Page / Total Page'>
-            <Button rounded='none' p='0' display='flex' alignItems='center' justifyContent='center'>
-              {pageNumber} / {numPages}
+      <HStack>
+        {numPages && (
+          <HStack gap='0' justify='center'>
+            <Button
+              p='0'
+              roundedRight='none'
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              onClick={gotoPrev}
+            >
+              <AiOutlineLeft />
             </Button>
-          </Tooltip>
-          <Button
-            onClick={gotoNext}
-            roundedLeft='none'
-            p='0'
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-          >
-            <AiOutlineRight />
-          </Button>
-        </HStack>
-      )}
+            <Tooltip label='Active Page / Total Page'>
+              <Button
+                rounded='none'
+                p='0'
+                display='flex'
+                alignItems='center'
+                justifyContent='center'
+              >
+                {pageNumber} / {numPages}
+              </Button>
+            </Tooltip>
+            <Button
+              onClick={gotoNext}
+              roundedLeft='none'
+              p='0'
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+            >
+              <AiOutlineRight />
+            </Button>
+          </HStack>
+        )}
+      </HStack>
     </Box>
   );
 };

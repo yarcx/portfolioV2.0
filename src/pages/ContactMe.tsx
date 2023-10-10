@@ -93,6 +93,7 @@ const ContactMe = () => {
         as='form'
         px='.6rem'
         py='1rem'
+        name='contactMe'
         onSubmit={handleSubmit(onSubmit)}
       >
         <VStack align='start' w='full' mb='1rem'>

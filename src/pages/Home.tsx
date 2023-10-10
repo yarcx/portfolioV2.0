@@ -1,13 +1,22 @@
-import { Box, Button, HStack, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, Image, Text, VStack, keyframes } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { MdPersonPinCircle } from "react-icons/md";
 import { BsArrowBarRight } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
+
+const animationKeyframes = keyframes`
+  0% { transform: translateX(1rem) }
+  50% { transform: translateX(.5rem) }
+  100% { transform: translateX(0rem) }
+`;
+
+const animation = `${animationKeyframes} 2s ease-in-out infinite`;
 
 const Home = () => {
   const { borderColor, bgColor, grayText } = useDisplayHooks();
@@ -185,7 +194,9 @@ const Home = () => {
             _hover={{ textDecor: "underline" }}
           >
             <Text>Check out my resume</Text>
-            <BsArrowBarRight />
+            <Box as={motion.div} transition='0.5s linear' animation={animation}>
+              <BsArrowBarRight />
+            </Box>
           </HStack>
         </Link>
       </HStack>

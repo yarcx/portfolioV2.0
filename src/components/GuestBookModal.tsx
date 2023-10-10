@@ -63,7 +63,7 @@ const GuestBookModal = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} id='messageForm'>
       <ModalHeader textAlign='center' fontSize='xl' fontWeight='extrabold'>
         Post Your Message
       </ModalHeader>

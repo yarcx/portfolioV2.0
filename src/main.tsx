@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import UiDisplayContextProvider from "./context/UiDisplayContext.tsx";
 import ModalWrapper from "./components/ModalWrapper.tsx";
 import AuthContextProvider from "./context/AuthContext.tsx";
+import "animate.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

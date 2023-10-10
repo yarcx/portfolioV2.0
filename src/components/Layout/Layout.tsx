@@ -15,12 +15,31 @@ import useDisplayHooks from "../../hooks/useDisplayHooks";
 import { BsSearch } from "react-icons/bs";
 import { PageLink, articleList } from "../../utils/constants";
 import useUiContext from "../../hooks/useUiContext";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Layout = () => {
   const { bgColor, borderColor, displayUiBg } = useDisplayHooks();
   const {
     state: { uiColor },
   } = useUiContext();
+  const [recentReadSearch, setRecentReadSearch] = useState("");
+
+  const handleSearchRecentReadOrGoogle = (searchString: string) => {
+    setRecentReadSearch(searchString);
+  };
+
+  const { handleSubmit } = useForm();
+
+  const onSubmit = async () => {
+    if (!articleList.some((art) => art.title.toLowerCase().includes(recentReadSearch))) {
+      const formattedQuery = recentReadSearch.replace(/\s+/g, "+");
+      const googleURL = `https://www.google.com/search?q=${formattedQuery}`;
+      window.open(googleURL, "_blank");
+    }
+    setRecentReadSearch("");
+  };
+
   return (
     <Box
       bg={bgColor}
@@ -76,34 +95,41 @@ const Layout = () => {
         </Flex>
 
         <Box w={"370px"} as='aside' display={["none", "none", "none", "none", "block"]} py='.6rem'>
-          <InputGroup>
-            <InputLeftElement pointerEvents='none'>
-              <BsSearch color='gray.300' />
-            </InputLeftElement>
-            <Input
-              rounded='3xl'
-              _active={{ borderColor: uiColor, outline: uiColor }}
-              focusBorderColor={uiColor}
-              bg={displayUiBg}
-              type='text'
-              placeholder='Search recent reads'
-            />
-          </InputGroup>
+          <form onSubmit={handleSubmit(onSubmit)} id='recentReads'>
+            <InputGroup>
+              <InputLeftElement pointerEvents='none'>
+                <BsSearch color='gray.300' />
+              </InputLeftElement>
+              <Input
+                rounded='3xl'
+                _active={{ borderColor: uiColor, outline: uiColor }}
+                focusBorderColor={uiColor}
+                bg={displayUiBg}
+                type='text'
+                onChange={(e) => handleSearchRecentReadOrGoogle(e.target.value.toLowerCase())}
+                placeholder='Search recent reads'
+              />
+            </InputGroup>
+          </form>
 
           <Box mt='2rem' bg={displayUiBg} rounded='lg' py='.5rem' h='90%' px={".8rem"}>
             <Heading size='md' mb='1rem'>
-              Recently read articles
+              Recently read articles or Google
             </Heading>
 
-            {articleList.map((item, index) => (
-              <Article
-                key={index}
-                author={item.author}
-                title={item.title}
-                firstParagraph={item.firstParagraph}
-                linkUrl={item.linkUrl}
-              />
-            ))}
+            {articleList
+              .filter((article) => {
+                return article.title.toLowerCase().includes(recentReadSearch);
+              })
+              .map((item, index) => (
+                <Article
+                  key={index}
+                  author={item.author}
+                  title={item.title}
+                  firstParagraph={item.firstParagraph}
+                  linkUrl={item.linkUrl}
+                />
+              ))}
           </Box>
         </Box>
       </HStack>
