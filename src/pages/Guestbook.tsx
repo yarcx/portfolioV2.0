@@ -47,7 +47,7 @@ const Guestbook = () => {
       setIsLoading(false);
     }
   };
-
+  // need to work on the unnecessary rerender on this page
   useEffect(() => {
     getGuestBooks();
   }, [isModalOpen]);
