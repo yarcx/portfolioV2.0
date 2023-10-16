@@ -39,6 +39,7 @@ const SignUpModal = () => {
               signInWithGitHub(googleProvider);
               closeModal();
             }}
+            isDisabled={true}
           >
             Sign in with Google
           </Button>

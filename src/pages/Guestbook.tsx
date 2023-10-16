@@ -6,18 +6,19 @@ import {
   LIGHT_MODE,
   Post_As_Guest_Modal,
   SignUp_Modal,
-  guestCollectionRef,
+  // guestCollectionRef,
   providers,
 } from "../utils/constants";
 import useUiContext from "../hooks/useUiContext";
 import { useEffect, useState } from "react";
-import { auth } from "../db.config/firebase";
-import { signOut } from "firebase/auth";
-import { DocumentData, QueryDocumentSnapshot, getDocs } from "firebase/firestore/lite";
+// import { auth } from "../db.config/firebase";
+// import { signOut } from "firebase/auth";
+// import { DocumentData, QueryDocumentSnapshot, getDocs } from "firebase/firestore/lite";
 import GuestBookRow from "../components/GuestBookRow";
 import { IGuestbook } from "../utils/types";
 import useAuthContext from "../hooks/useAuthContext";
 import LoadingComponent from "../components/LoadingComponent";
+import supabase from "../utils/api";
 
 const Guestbook = () => {
   const {
@@ -29,27 +30,32 @@ const Guestbook = () => {
 
   const [msgs, setMsgs] = useState<IGuestbook[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useAuthContext();
+  const { user, signOut } = useAuthContext();
+  console.log("🚀 ~ file: Guestbook.tsx:30 ~ Guestbook ~ user:", user, msgs);
 
   const getGuestBooks = async () => {
     try {
       setIsLoading(true);
-      const res = await getDocs(guestCollectionRef);
-      const guestbook = res.docs
-        .map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
-          ...doc.data(),
-        }))
-        .sort((a, b) => b?.createdAt - a?.createdAt) as IGuestbook[];
-      setMsgs(guestbook);
+      const { data, error } = await supabase
+        .from("guestBook")
+        .select("*")
+        .order("created_at", { ascending: false });
+      data && setMsgs([...data]);
+      if (error) {
+        console.error(error);
+      }
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
+
   // need to work on the unnecessary rerender on this page
   useEffect(() => {
-    getGuestBooks();
+    if (!isModalOpen) {
+      getGuestBooks();
+    }
   }, [isModalOpen]);
 
   const msgContent = msgs?.length
@@ -111,7 +117,7 @@ const Guestbook = () => {
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
                 onClick={() => {
-                  signOut(auth);
+                  signOut();
                 }}
               >
                 Sign out

@@ -34,7 +34,7 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
       </Document>
       <HStack>
         {numPages && (
-          <HStack gap='0' justify='center'>
+          <HStack gap='0' justify='center' w='full'>
             <Button
               p='0'
               roundedRight='none'

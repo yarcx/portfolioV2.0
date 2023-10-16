@@ -3,7 +3,6 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { MdPersonPinCircle } from "react-icons/md";
 import { BsArrowBarRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 
@@ -11,9 +10,10 @@ const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
 
 const animationKeyframes = keyframes`
-  0% { transform: translateX(1rem) }
-  50% { transform: translateX(.5rem) }
-  100% { transform: translateX(0rem) }
+  0% { transform: translateX(.8rem) }
+  50% { transform: translateX(.4rem) }
+  75% { transform: translateX(.1rem) }
+  100% { transform: translateX(-0.2rem) }
 `;
 
 const animation = `${animationKeyframes} 2s ease-in-out infinite`;
@@ -152,7 +152,7 @@ const Home = () => {
         px='1rem'
       >
         <VStack width='60%' justifyContent='start' alignItems='center'>
-          <MdPersonPinCircle />
+          {/* <MdPersonPinCircle /> */}
 
           <Box minW='50px'>
             <Image

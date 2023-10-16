@@ -3,18 +3,19 @@ import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { db } from "../db.config/firebase";
-import { useEffect, useState } from "react";
+// import { db } from "../db.config/firebase";
+import { useEffect } from "react";
 import CustomToastBar from "../components/CustomToastBar";
-import {
-  DocumentData,
-  QueryDocumentSnapshot,
-  addDoc,
-  collection,
-  getDocs,
-} from "firebase/firestore/lite";
+// import {
+//   DocumentData,
+//   QueryDocumentSnapshot,
+//   addDoc,
+//   collection,
+//   getDocs,
+// } from "firebase/firestore/lite";
 import { Link } from "react-router-dom";
 import { BsArrowBarRight } from "react-icons/bs";
+import supabase from "../utils/api";
 
 type IMessageField = {
   name: string;
@@ -25,23 +26,31 @@ type IMessageField = {
 
 const ContactMe = () => {
   const { borderColor, displayUiBg } = useDisplayHooks();
-  const [, setMessages] = useState<IMessageField[]>();
+  // const [, setMessages] = useState<IMessageField[]>();
   const {
     state: { uiColor },
   } = useUiContext();
   const toast = useToast();
 
-  const collectionRef = collection(db, "messages");
+  // const collectionRef = collection(db, "messages");
 
   const getTodo = async () => {
+    // try {
+    //   const todo = await getDocs(collectionRef);
+    //   const todoData = todo.docs.map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
+    //     ...doc.data(),
+    //   }));
+    //   setMessages(todoData as IMessageField[]);
+    // } catch (err) {
+    //   console.log(err);
+    // }
     try {
-      const todo = await getDocs(collectionRef);
-      const todoData = todo.docs.map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
-        ...doc.data(),
-      }));
-      setMessages(todoData as IMessageField[]);
-    } catch (err) {
-      console.log(err);
+      // const { data, error } = await supabase.getChannels();
+      const response = await supabase.from("messages").select("*");
+      console.log("check data", response);
+      // if (error) console.log("error", error);
+    } catch (error) {
+      if (error) console.log("error inside catch", error);
     }
   };
 
@@ -60,7 +69,11 @@ const ContactMe = () => {
 
   const onSubmit: SubmitHandler<IMessageField> = async (data) => {
     try {
-      await addDoc(collectionRef, { ...data, createdAt: new Date().getTime() });
+      // await addDoc(collectionRef, { ...data, createdAt: new Date().getTime() });
+      await supabase
+        .from("messages")
+        .insert({ ...data })
+        .single();
       toast({
         status: "success",
         duration: 3000,

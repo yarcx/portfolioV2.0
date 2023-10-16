@@ -13,11 +13,12 @@ import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useForm } from "react-hook-form";
-import { addDoc } from "firebase/firestore/lite";
+// import { addDoc } from "firebase/firestore/lite";
 import CustomToastBar from "./CustomToastBar";
 import { useState } from "react";
-import { guestCollectionRef } from "../utils/constants";
+// import { guestCollectionRef } from "../utils/constants";
 import { IGuestbook, IUserInfo } from "../utils/types";
+import supabase from "../utils/api";
 
 const GuestBookModal = () => {
   const [submittingPost, setSubmittingPost] = useState(false);
@@ -35,9 +36,9 @@ const GuestBookModal = () => {
 
   const onSubmit = async ({ message }: { message: string }) => {
     setSubmittingPost(true);
-    const data: IGuestbook = { message, createdAt: new Date().getTime(), ...(user as IUserInfo) };
+    const msg: IGuestbook = { message, ...(user as IUserInfo) };
     try {
-      await addDoc(guestCollectionRef, data);
+      await supabase.from("guestBook").insert(msg);
       toast({
         status: "success",
         duration: 3000,
