@@ -134,6 +134,3 @@ export const providers = {
 
 export const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 export const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-// export const supabaseUrl = "https://kilcjxgtsrxkutcterbv.supabase.co";
-// export const supabaseKey =
-//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpbGNqeGd0c3J4a3V0Y3RlcmJ2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTc0NTM1NTQsImV4cCI6MjAxMzAyOTU1NH0.tg-Y-DoDtMVMNaU7J6RJHfL-7i1N7Jkv8lrnhz7tmQ0";
