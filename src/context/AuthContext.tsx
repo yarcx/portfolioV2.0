@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { IUserInfo } from "../utils/types";
-import supabase from "../utils/api";
+import supabase, { getURL } from "../utils/api";
 
 type IInitialState = {
   user: IUserInfo | null;
@@ -33,6 +33,9 @@ const AuthContextProvider = ({ children }: { children: React.ReactElement }) => 
       // const response = await signInWithPopup(auth, provider);
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "github",
+        options: {
+          redirectTo: getURL(),
+        },
       });
       //  if (!error) {
       //    const { user_name, avatar_url } = data?.user?.identities?.[0]?.identity_data ?? {};
