@@ -3,7 +3,7 @@ import { LIGHT_MODE } from "../utils/constants";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import useAuthContext from "../hooks/useAuthContext";
 import useUiContext from "../hooks/useUiContext";
-import { githubProvider, googleProvider } from "../db.config/firebase";
+import { githubProvider } from "../db.config/firebase";
 
 const SignUpModal = () => {
   const { colorMode } = useColorMode();
@@ -36,10 +36,8 @@ const SignUpModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             onClick={() => {
-              signInWithGitHub(googleProvider);
-              closeModal();
+              alert("This is coming soon!!!");
             }}
-            isDisabled={true}
           >
             Sign in with Google
           </Button>
