@@ -87,7 +87,7 @@ const Home = () => {
         borderBottom='1px solid'
         borderColor={borderColor}
       >
-        <Marquee>
+        <Marquee pauseOnHover={true} pauseOnClick={true} speed={40}>
           <HStack px={3} justifyContent='space-between' gap='1rem'>
             {easyLinks.map((item, index) =>
               !item?.link.startsWith("#") ? (
