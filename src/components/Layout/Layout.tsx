@@ -107,7 +107,7 @@ const Layout = () => {
                 bg={displayUiBg}
                 type='text'
                 onChange={(e) => handleSearchRecentReadOrGoogle(e.target.value.toLowerCase())}
-                placeholder='Search recent reads'
+                placeholder='Search recent reads or google'
               />
             </InputGroup>
           </form>

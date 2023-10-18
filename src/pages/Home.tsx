@@ -5,6 +5,7 @@ import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { BsArrowBarRight } from "react-icons/bs";
 import { motion } from "framer-motion";
+import Marquee from "react-fast-marquee";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
@@ -86,34 +87,29 @@ const Home = () => {
         borderBottom='1px solid'
         borderColor={borderColor}
       >
-        <HStack
-          px={3}
-          justifyContent='space-between'
-          width='100%'
-          gap='5rem'
-          overflow='auto'
-          className='scroll-element primary'
-        >
-          {easyLinks.map((item, index) => (
-            <Button
-              key={index}
-              bg='none'
-              color={grayText}
-              leftIcon={item.icon}
-              colorScheme='teal'
-              variant='solid'
-              _hover={{ bg: "none" }}
-              py='1px'
-              px='0'
-              fontSize='sm'
-            >
-              <Text _hover={{ color: grayText }} transition='color .2s ease'>
-                {item.title}
-              </Text>
-            </Button>
-          ))}
-        </HStack>
-        <HStack
+        <Marquee>
+          <HStack px={3} justifyContent='space-between' gap='1rem'>
+            {easyLinks.map((item, index) => (
+              <Button
+                key={index}
+                bg='none'
+                color={grayText}
+                leftIcon={item.icon}
+                colorScheme='teal'
+                variant='solid'
+                _hover={{ bg: "none" }}
+                py='1px'
+                px='0'
+                fontSize='sm'
+              >
+                <Text _hover={{ color: grayText }} transition='color .2s ease'>
+                  {item.title}
+                </Text>
+              </Button>
+            ))}
+          </HStack>
+        </Marquee>
+        {/* <HStack
           px={3}
           ml='3rem'
           justifyContent='space-between'
@@ -140,7 +136,7 @@ const Home = () => {
               </Text>
             </Button>
           ))}
-        </HStack>
+        </HStack> */}
       </HStack>
 
       <HStack
