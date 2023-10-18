@@ -31,7 +31,6 @@ const Guestbook = () => {
   const [msgs, setMsgs] = useState<IGuestbook[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { user, signOut } = useAuthContext();
-  console.log("🚀 ~ file: Guestbook.tsx:30 ~ Guestbook ~ user:", user, msgs);
 
   const getGuestBooks = async () => {
     try {
