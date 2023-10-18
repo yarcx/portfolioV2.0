@@ -89,24 +89,45 @@ const Home = () => {
       >
         <Marquee>
           <HStack px={3} justifyContent='space-between' gap='1rem'>
-            {easyLinks.map((item, index) => (
-              <Button
-                key={index}
-                bg='none'
-                color={grayText}
-                leftIcon={item.icon}
-                colorScheme='teal'
-                variant='solid'
-                _hover={{ bg: "none" }}
-                py='1px'
-                px='0'
-                fontSize='sm'
-              >
-                <Text _hover={{ color: grayText }} transition='color .2s ease'>
-                  {item.title}
-                </Text>
-              </Button>
-            ))}
+            {easyLinks.map((item, index) =>
+              !item?.link.startsWith("#") ? (
+                <Button
+                  key={index}
+                  bg='none'
+                  color={grayText}
+                  leftIcon={item.icon}
+                  colorScheme='teal'
+                  variant='solid'
+                  _hover={{ bg: "none" }}
+                  py='1px'
+                  px='0'
+                  fontSize='sm'
+                >
+                  <a href={item?.link} target='_blank' referrerPolicy='no-referrer'>
+                    <Text _hover={{ color: grayText }} transition='color .2s ease'>
+                      {item.title}
+                    </Text>
+                  </a>
+                </Button>
+              ) : (
+                <Button
+                  key={index}
+                  bg='none'
+                  color={grayText}
+                  leftIcon={item.icon}
+                  colorScheme='teal'
+                  variant='solid'
+                  _hover={{ bg: "none" }}
+                  py='1px'
+                  px='0'
+                  fontSize='sm'
+                >
+                  <Text _hover={{ color: grayText }} transition='color .2s ease'>
+                    {item.title}
+                  </Text>
+                </Button>
+              )
+            )}
           </HStack>
         </Marquee>
         {/* <HStack

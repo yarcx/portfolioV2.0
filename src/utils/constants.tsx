@@ -89,26 +89,32 @@ export const articleList = [
 export const easyLinks = [
   {
     title: "Abuja Nigeria",
+    link: "#",
     icon: <MdLocationPin />,
   },
   {
     title: "Instagram",
+    link: "https://www.instagram.com/yarcxx/",
     icon: <BsInstagram />,
   },
   {
     title: "Github",
+    link: "https://github.com/yarcx",
     icon: <BsGithub />,
   },
   {
     title: "LinkedIn",
+    link: "https://www.linkedin.com/in/yakubu-hassan/",
     icon: <BsLinkedin />,
   },
   {
     title: "Twitter",
+    link: "https://twitter.com/Hassan_Yarcx",
     icon: <BsTwitter />,
   },
   {
     title: "09033872114",
+    link: "#",
     icon: <BsTelephone />,
   },
 ];
