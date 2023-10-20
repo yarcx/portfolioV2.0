@@ -5,6 +5,7 @@ import { RiBriefcaseLine, RiHomeHeartLine, RiQuestionAnswerLine } from "react-ic
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { collection } from "firebase/firestore/lite";
 import { db } from "../db.config/firebase";
+import { keyframes } from "@chakra-ui/react";
 
 export const BLACK_BG = "#000000";
 export const WHITE_BG = "#FFFFFF";
@@ -134,3 +135,12 @@ export const providers = {
 
 export const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 export const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+
+const animationKeyframes = keyframes`
+  0% { transform: translateX(.8rem) }
+  50% { transform: translateX(.4rem) }
+  75% { transform: translateX(.1rem) }
+  100% { transform: translateX(-0.2rem) }
+`;
+
+export const animation = `${animationKeyframes} 2s ease-in-out infinite`;

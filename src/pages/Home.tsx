@@ -1,26 +1,22 @@
-import { Box, Button, HStack, Heading, Image, Text, VStack, keyframes } from "@chakra-ui/react";
+import { Box, Button, HStack, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
-import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
+import { CONTACT_ME_LINK, animation, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { BsArrowBarRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
+import useUiContext from "../hooks/useUiContext";
+import CustomBadge from "../components/CustomBadge";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
 
-const animationKeyframes = keyframes`
-  0% { transform: translateX(.8rem) }
-  50% { transform: translateX(.4rem) }
-  75% { transform: translateX(.1rem) }
-  100% { transform: translateX(-0.2rem) }
-`;
-
-const animation = `${animationKeyframes} 2s ease-in-out infinite`;
-
 const Home = () => {
   const { borderColor, bgColor, grayText } = useDisplayHooks();
+  const {
+    state: { uiColor },
+  } = useUiContext();
   return (
     <Box as='main' w='full'>
       <PageInfoHeader />
@@ -68,6 +64,8 @@ const Home = () => {
           borderColor={borderColor}
           bg='transparent'
           rounded='full'
+          _hover={{ bg: uiColor, opacity: "0.8", color: "white" }}
+          transition='all .2s linear'
         >
           <Link to={CONTACT_ME_LINK}>Contact Me</Link>
         </Button>
@@ -87,7 +85,14 @@ const Home = () => {
         borderBottom='1px solid'
         borderColor={borderColor}
       >
-        <Marquee pauseOnHover={true} pauseOnClick={true} speed={40}>
+        <Marquee
+          pauseOnHover={true}
+          pauseOnClick={true}
+          speed={40}
+          gradientWidth={30}
+          gradientColor={bgColor}
+          gradient={true}
+        >
           <HStack px={3} justifyContent='space-between' gap='1rem'>
             {easyLinks.map((item, index) =>
               !item?.link.startsWith("#") ? (
@@ -98,15 +103,14 @@ const Home = () => {
                   leftIcon={item.icon}
                   colorScheme='teal'
                   variant='solid'
-                  _hover={{ bg: "none" }}
                   py='1px'
                   px='0'
                   fontSize='sm'
+                  _hover={{ color: uiColor }}
+                  transition='all .2s linear'
                 >
                   <a href={item?.link} target='_blank' referrerPolicy='no-referrer'>
-                    <Text _hover={{ color: grayText }} transition='color .2s ease'>
-                      {item.title}
-                    </Text>
+                    <Text transition='color .2s ease-in'>{item.title}</Text>
                   </a>
                 </Button>
               ) : (
@@ -117,47 +121,18 @@ const Home = () => {
                   leftIcon={item.icon}
                   colorScheme='teal'
                   variant='solid'
-                  _hover={{ bg: "none" }}
+                  _hover={{ color: uiColor }}
+                  transition='color .2s linear'
                   py='1px'
                   px='0'
                   fontSize='sm'
                 >
-                  <Text _hover={{ color: grayText }} transition='color .2s ease'>
-                    {item.title}
-                  </Text>
+                  <Text transition='color .2s ease-in'>{item.title}</Text>
                 </Button>
               )
             )}
           </HStack>
         </Marquee>
-        {/* <HStack
-          px={3}
-          ml='3rem'
-          justifyContent='space-between'
-          width='100%'
-          overflow='auto'
-          gap='5rem'
-          className='scroll-element secondary'
-        >
-          {easyLinks.map((item, index) => (
-            <Button
-              key={index}
-              bg='none'
-              color={grayText}
-              leftIcon={item.icon}
-              colorScheme='teal'
-              variant='solid'
-              _hover={{ bg: "none" }}
-              py='1px'
-              px='0'
-              fontSize='sm'
-            >
-              <Text _hover={{ color: grayText }} transition='color .2s ease'>
-                {item.title}
-              </Text>
-            </Button>
-          ))}
-        </HStack> */}
       </HStack>
 
       <HStack
@@ -192,12 +167,15 @@ const Home = () => {
             About Me
           </Text>
           <Text fontWeight='normal' fontSize='sm'>
-            Hello there! I'm Hassan Yaqub . A Software Engineer & Technical Writer Based in Nigeria.
-            I'm Experienced in building pixel-perfect Frontend application and server side
-            applications (Backend). I'm passionate about sharing my experience in my career, and
-            also some technologies/concept that i believe can help someone out there. When i'm not
-            working or learning something new , then i must be working out at the Gym, or playing
-            video Games, or watching Anime or any movie with superhero in it.
+            Hello there! I'm Hassan Yaqub . A <CustomBadge text='Software Engineer' />
+            & <CustomBadge text='Technical Writer' />
+            Technical Writer Based in Nigeria. I'm Experienced in building pixel-perfect{" "}
+            <CustomBadge text='Frontend' /> application and server side applications (
+            <CustomBadge text='Backend' />
+            ). I'm passionate about sharing my experience in my career, and also some
+            technologies/concept that i believe can help someone out there. When i'm not working or
+            learning something new , then i must be working out at the <CustomBadge text='Gym' />,
+            or playing video Games, or watching Anime or any movie with superhero in it.
           </Text>
         </VStack>
       </HStack>

@@ -161,6 +161,7 @@ const ContactMe = () => {
             height='46px'
             rounded='3xl'
             px='1rem'
+            fontSize='md'
             disabled={isLoading}
             isLoading={isSubmitting}
           >

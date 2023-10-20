@@ -31,7 +31,7 @@ const SignUpModal = () => {
             variant='outline'
             py='.6rem'
             px='1rem'
-            fontSize='lg'
+            fontSize='md'
             leftIcon={<FaGoogle />}
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
@@ -48,7 +48,7 @@ const SignUpModal = () => {
             bg={colorMode === LIGHT_MODE ? "black" : "white"}
             py='.6rem'
             px='1rem'
-            fontSize='lg'
+            fontSize='md'
             leftIcon={<FaGithub />}
             fontWeight='normal'
             _hover={{ opacity: ".9" }}

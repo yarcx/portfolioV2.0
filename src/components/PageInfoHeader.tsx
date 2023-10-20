@@ -7,11 +7,15 @@ import { DARK_MODE, HOME, LIGHT_MODE, PageLink, RESUME } from "../utils/constant
 import { useLocation, useNavigate } from "react-router-dom";
 import MobileSidebar from "./MobileSidebar";
 import useDisplayHooks from "../hooks/useDisplayHooks";
+import useUiContext from "../hooks/useUiContext";
 
 const PageInfoHeader = () => {
   const { colorMode, setColorMode } = useColorMode();
   const { bgColor } = useDisplayHooks();
   const { pathname } = useLocation();
+  const {
+    state: { uiColor },
+  } = useUiContext();
   const navigate = useNavigate();
   const currentPage = PageLink.find((page) => page.route === pathname)?.link;
 
@@ -59,7 +63,12 @@ const PageInfoHeader = () => {
         </HStack>
 
         {currentPage === RESUME && (
-          <Button>
+          <Button
+            fontSize={"md"}
+            fontWeight='semibold'
+            _hover={{ bg: uiColor, opacity: "", color: "white" }}
+            transition='all .2s linear'
+          >
             <a href={pdfDownloadLink} download='Hassan Resume'>
               Download Resume
             </a>

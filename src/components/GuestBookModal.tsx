@@ -89,7 +89,7 @@ const GuestBookModal = () => {
             // bg={colorMode === LIGHT_MODE ? "black" : "white"}
             py='.6rem'
             px='1rem'
-            fontSize='lg'
+            fontSize='md'
             bg={uiColor}
             leftIcon={<HiOutlineChatBubbleLeftRight />}
             fontWeight='normal'

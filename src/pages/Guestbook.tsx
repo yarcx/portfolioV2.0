@@ -76,8 +76,8 @@ const Guestbook = () => {
         as='section'
         px='10px'
       >
-        <HStack my='1rem' align={["center", "", "", "self-start"]} justifyContent='space-between'>
-          <Text fontSize={["md", "", "xl", ""]} pt=''>
+        <HStack my='1rem' align={"center"} justifyContent='space-between'>
+          <Text fontSize={["md", "", "lg", ""]} pt=''>
             Sign My Guestbook
           </Text>
 
@@ -88,7 +88,7 @@ const Guestbook = () => {
               bg={colorMode === LIGHT_MODE ? "black" : "white"}
               py='.6rem'
               px='1rem'
-              fontSize='lg'
+              fontSize='md'
               fontWeight='normal'
               _hover={{ opacity: ".9" }}
               onClick={() => {
@@ -111,7 +111,7 @@ const Guestbook = () => {
                 bg={colorMode === LIGHT_MODE ? "black" : "white"}
                 py='.6rem'
                 px='1rem'
-                fontSize='lg'
+                fontSize='md'
                 leftIcon={user?.provider === providers["github.com"] ? <FaGithub /> : <FaGoogle />}
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
@@ -128,7 +128,7 @@ const Guestbook = () => {
                 bg={colorMode === LIGHT_MODE ? "black" : "white"}
                 py='.6rem'
                 px='1rem'
-                fontSize='lg'
+                fontSize='md'
                 // leftIcon={<FaGithub />}
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
