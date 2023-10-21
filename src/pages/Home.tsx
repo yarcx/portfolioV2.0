@@ -143,7 +143,12 @@ const Home = () => {
         pb='2rem'
         px='1rem'
       >
-        <VStack width='60%' justifyContent='start' alignItems='center'>
+        <VStack
+          width='60%'
+          display={["none", "", "", "flex"]}
+          justifyContent='start'
+          alignItems='center'
+        >
           {/* <MdPersonPinCircle /> */}
 
           <Box minW='50px'>
