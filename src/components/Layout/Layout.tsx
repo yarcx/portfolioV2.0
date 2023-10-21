@@ -55,7 +55,7 @@ const Layout = () => {
         px={["", "", "1rem", "3rem"]}
         maxWidth='1400px'
         mx='auto'
-        minH='100dvh'
+        minH='100vh'
         overflowY='auto'
         pos='relative'
       >
