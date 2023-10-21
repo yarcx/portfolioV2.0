@@ -76,7 +76,12 @@ const Guestbook = () => {
         as='section'
         px='10px'
       >
-        <HStack my='1rem' align={"center"} justifyContent='space-between'>
+        <HStack
+          my='1rem'
+          align={"center"}
+          justifyContent={["center", "space-between"]}
+          flexWrap='wrap'
+        >
           <Text fontSize={["md", "", "lg", ""]} pt=''>
             Sign My Guestbook
           </Text>
