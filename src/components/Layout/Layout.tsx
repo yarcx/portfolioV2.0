@@ -95,6 +95,7 @@ const Layout = () => {
                     bg={isActive ? uiColor : ""}
                     color={isActive ? "light.100" : "dark.300"}
                     aria-label='Navigation Button'
+                    _active={{ bg: uiColor, color: isActive ? "light.100" : "dark.300" }}
                     icon={icon}
                     isRound
                   />
