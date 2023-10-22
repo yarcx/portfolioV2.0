@@ -83,7 +83,7 @@ const Guestbook = () => {
         <HStack
           my='1rem'
           align={"center"}
-          justifyContent={["space-between", "", "", "space-between"]}
+          justifyContent={["center", "", "", "space-between"]}
           flexWrap='wrap'
         >
           <Text
