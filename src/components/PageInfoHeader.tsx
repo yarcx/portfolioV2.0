@@ -65,7 +65,7 @@ const PageInfoHeader = () => {
         {currentPage === RESUME && (
           <Button
             fontSize={"md"}
-            fontWeight='semibold'
+            fontWeight='normal'
             _hover={{ bg: uiColor, opacity: "", color: "white" }}
             transition='all .2s linear'
           >

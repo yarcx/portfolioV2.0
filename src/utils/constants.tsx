@@ -138,9 +138,7 @@ export const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 const animationKeyframes = keyframes`
   0% { transform: translateX(.8rem) }
-  50% { transform: translateX(.4rem) }
-  75% { transform: translateX(.1rem) }
-  100% { transform: translateX(-0.2rem) }
+  100% { transform: translateX(0rem) }
 `;
 
-export const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+export const animation = `${animationKeyframes} 1.5s ease-in-out infinite`;

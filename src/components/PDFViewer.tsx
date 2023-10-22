@@ -8,10 +8,15 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 import LoadingComponent from "./LoadingComponent";
+import useUiContext from "../hooks/useUiContext";
 
 export const PDFViewer: FC<{ file: string }> = ({ file }) => {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
+
+  const {
+    state: { uiColor },
+  } = useUiContext();
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -42,6 +47,9 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
               alignItems='center'
               justifyContent='center'
               onClick={gotoPrev}
+              fontWeight='normal'
+              _hover={{ bg: uiColor, opacity: "", color: "white" }}
+              transition='all .2s linear'
             >
               <AiOutlineLeft />
             </Button>
@@ -50,6 +58,7 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
                 rounded='none'
                 p='0'
                 display='flex'
+                fontWeight='normal'
                 alignItems='center'
                 justifyContent='center'
               >
@@ -58,8 +67,11 @@ export const PDFViewer: FC<{ file: string }> = ({ file }) => {
             </Tooltip>
             <Button
               onClick={gotoNext}
+              fontWeight='normal'
               roundedLeft='none'
               p='0'
+              _hover={{ bg: uiColor, opacity: "", color: "white" }}
+              transition='all .2s linear'
               display='flex'
               alignItems='center'
               justifyContent='center'

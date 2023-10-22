@@ -15,7 +15,7 @@ const Resume = () => {
   const { borderColor } = useDisplayHooks();
 
   return (
-    <Box as='main' w='full'>
+    <Box as='main' w='full' overflowY='auto'>
       <PageInfoHeader />
       <Stack
         justifyContent='center'

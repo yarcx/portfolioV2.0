@@ -57,11 +57,15 @@ const Guestbook = () => {
     }
   }, [isModalOpen]);
 
-  const msgContent = msgs?.length
-    ? msgs?.map(({ message, displayName, photoURL }, index) => (
-        <GuestBookRow message={message} displayName={displayName} photoURL={photoURL} key={index} />
-      ))
-    : null;
+  const msgContent = msgs?.length ? (
+    msgs?.map(({ message, displayName, photoURL }, index) => (
+      <GuestBookRow message={message} displayName={displayName} photoURL={photoURL} key={index} />
+    ))
+  ) : (
+    <Text mt='1rem' w='full' textAlign='center'>
+      Sign up to leave a message. &#x1F604;
+    </Text>
+  );
 
   const loadingJsx = <LoadingComponent text='Messages' />;
 
@@ -79,36 +83,39 @@ const Guestbook = () => {
         <HStack
           my='1rem'
           align={"center"}
-          justifyContent={["center", "space-between"]}
+          justifyContent={["center", "", "", "space-between"]}
           flexWrap='wrap'
         >
-          <Text fontSize={["md", "", "lg", ""]} pt=''>
+          <Text
+            fontSize={["md", "", "lg", ""]}
+            w='auto'
+            textAlign={["center", "center", "left", "left"]}
+          >
             Sign My Guestbook
           </Text>
+          <HStack w='auto' justifyContent='space-between'>
+            {user && (
+              <Button
+                color={colorMode === LIGHT_MODE ? "white" : "black"}
+                size='md'
+                bg={colorMode === LIGHT_MODE ? "black" : "white"}
+                py='.6rem'
+                px='1rem'
+                fontSize='md'
+                fontWeight='normal'
+                _hover={{ opacity: ".9" }}
+                onClick={() => {
+                  openModal(Post_As_Guest_Modal, {
+                    title: "Display Settings",
+                    setMsgs,
+                    user,
+                  });
+                }}
+              >
+                Post a message
+              </Button>
+            )}
 
-          {user && (
-            <Button
-              color={colorMode === LIGHT_MODE ? "white" : "black"}
-              size='md'
-              bg={colorMode === LIGHT_MODE ? "black" : "white"}
-              py='.6rem'
-              px='1rem'
-              fontSize='md'
-              fontWeight='normal'
-              _hover={{ opacity: ".9" }}
-              onClick={() => {
-                openModal(Post_As_Guest_Modal, {
-                  title: "Display Settings",
-                  setMsgs,
-                  user,
-                });
-              }}
-            >
-              Post a message
-            </Button>
-          )}
-
-          <>
             {user ? (
               <Button
                 color={colorMode === LIGHT_MODE ? "white" : "black"}
@@ -144,7 +151,7 @@ const Guestbook = () => {
                 Sign in to post
               </Button>
             )}
-          </>
+          </HStack>
         </HStack>
       </Box>
 

@@ -1,21 +1,11 @@
-import { Box, Button, HStack, Input, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Input, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import useUiContext from "../hooks/useUiContext";
 import { useForm, SubmitHandler } from "react-hook-form";
-// import { db } from "../db.config/firebase";
-import { useEffect } from "react";
 import CustomToastBar from "../components/CustomToastBar";
-// import {
-//   DocumentData,
-//   QueryDocumentSnapshot,
-//   addDoc,
-//   collection,
-//   getDocs,
-// } from "firebase/firestore/lite";
-import { Link } from "react-router-dom";
-import { BsArrowBarRight } from "react-icons/bs";
 import supabase from "../utils/api";
+import FooterLink from "../components/FooterLink";
 
 type IMessageField = {
   name: string;
@@ -31,34 +21,6 @@ const ContactMe = () => {
     state: { uiColor },
   } = useUiContext();
   const toast = useToast();
-
-  // const collectionRef = collection(db, "messages");
-
-  const getTodo = async () => {
-    // try {
-    //   const todo = await getDocs(collectionRef);
-    //   const todoData = todo.docs.map((doc: QueryDocumentSnapshot<DocumentData, DocumentData>) => ({
-    //     ...doc.data(),
-    //   }));
-    //   setMessages(todoData as IMessageField[]);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    try {
-      // const { data, error } = await supabase.getChannels();
-      const response = await supabase.from("messages").select("*");
-      console.log("check data", response);
-      // if (error) console.log("error", error);
-    } catch (error) {
-      if (error) console.log("error inside catch", error);
-    }
-  };
-
-  useEffect(() => {
-    getTodo();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const {
     register,
@@ -169,29 +131,11 @@ const ContactMe = () => {
           </Button>
         </VStack>
       </VStack>
-
-      <HStack
-        as='footer'
-        pos='absolute'
-        bottom={0}
-        justifyContent='end'
-        mt='1rem'
-        px='1rem'
-        mb={["5rem", "", "", "", ""]}
-        w='100%'
-      >
-        <Link to='/'>
-          <HStack
-            as='div'
-            align='center'
-            transition='all 0.3s ease-in'
-            _hover={{ textDecor: "underline" }}
-          >
-            <Text>Go back Home</Text>
-            <BsArrowBarRight />
-          </HStack>
-        </Link>
-      </HStack>
+      <Box pos='absolute' bottom={["5rem", "", "3rem", "2rem"]} w='full'>
+        <FooterLink to=''>
+          <Text>Go Home</Text>
+        </FooterLink>
+      </Box>
     </Box>
   );
 };

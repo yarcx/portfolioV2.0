@@ -1,13 +1,12 @@
 import { Box, Button, HStack, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import PageInfoHeader from "../components/PageInfoHeader";
 import useDisplayHooks from "../hooks/useDisplayHooks";
-import { CONTACT_ME_LINK, animation, easyLinks } from "../utils/constants";
+import { CONTACT_ME_LINK, easyLinks } from "../utils/constants";
 import { Link } from "react-router-dom";
-import { BsArrowBarRight } from "react-icons/bs";
-import { motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import useUiContext from "../hooks/useUiContext";
 import CustomBadge from "../components/CustomBadge";
+import FooterLink from "../components/FooterLink";
 
 const bannerImg = "./twitterBanner.jpeg";
 const avatar = "./avatar.jpeg";
@@ -135,71 +134,61 @@ const Home = () => {
         </Marquee>
       </HStack>
 
-      <HStack
-        borderBottom='1px solid'
-        alignItems='stretch'
-        borderColor={borderColor}
-        pt='.5rem'
-        pb='2rem'
-        px='1rem'
-      >
-        <VStack
-          width='60%'
-          display={["none", "", "", "flex"]}
-          justifyContent='start'
-          alignItems='center'
+      <VStack>
+        <HStack
+          borderBottom='1px solid'
+          alignItems='stretch'
+          borderColor={borderColor}
+          pt='.5rem'
+          pb='2rem'
+          px='1rem'
         >
-          {/* <MdPersonPinCircle /> */}
-
-          <Box minW='50px'>
-            <Image
-              boxSize={["50px", "60px"]}
-              rounded='full'
-              border='4px solid'
-              borderColor={bgColor}
-              backgroundSize='contain'
-              overflow='hidden'
-              src={avatar}
-              alt='profile picture'
-              objectFit='cover'
-              cursor='pointer'
-              _hover={{ opacity: 0.98 }}
-            />
-          </Box>
-        </VStack>
-        <VStack alignItems='start'>
-          <Text fontWeight='medium' fontSize='sm' pt='0' mt='0'>
-            About Me
-          </Text>
-          <Text fontWeight='normal' fontSize='sm'>
-            Hello there! I'm Hassan Yaqub . A <CustomBadge text='Software Engineer' />
-            & <CustomBadge text='Technical Writer' />
-            Technical Writer Based in Nigeria. I'm Experienced in building pixel-perfect{" "}
-            <CustomBadge text='Frontend' /> application and server side applications (
-            <CustomBadge text='Backend' />
-            ). I'm passionate about sharing my experience in my career, and also some
-            technologies/concept that i believe can help someone out there. When i'm not working or
-            learning something new , then i must be working out at the <CustomBadge text='Gym' />,
-            or playing video Games, or watching Anime or any movie with superhero in it.
-          </Text>
-        </VStack>
-      </HStack>
-
-      <HStack as='footer' justifyContent='end' mt='1rem' px='1rem' mb={["5rem", "", "", "", ""]}>
-        <Link to='/resume'>
-          <HStack
-            as='div'
-            align='center'
-            transition='all 0.3s ease-in'
-            _hover={{ textDecor: "underline" }}
+          <VStack
+            width='60%'
+            display={["none", "", "", "flex"]}
+            justifyContent='start'
+            alignItems='center'
           >
-            <Text>Check out my resume</Text>
-            <Box as={motion.div} transition='0.5s linear' animation={animation}>
-              <BsArrowBarRight />
+            {/* <MdPersonPinCircle /> */}
+
+            <Box minW='50px'>
+              <Image
+                boxSize={["50px", "60px"]}
+                rounded='full'
+                border='4px solid'
+                borderColor={bgColor}
+                backgroundSize='contain'
+                overflow='hidden'
+                src={avatar}
+                alt='profile picture'
+                objectFit='cover'
+                cursor='pointer'
+                _hover={{ opacity: 0.98 }}
+              />
             </Box>
-          </HStack>
-        </Link>
-      </HStack>
+          </VStack>
+          <VStack alignItems='start'>
+            <Text fontWeight='medium' fontSize='sm' pt='0' mt='0'>
+              About Me
+            </Text>
+            <Text fontWeight='normal' fontSize='sm'>
+              Hello there! I'm Hassan Yaqub . A <CustomBadge text='Software Engineer' />
+              & <CustomBadge text='Technical Writer' />
+              Technical Writer Based in Nigeria. I'm Experienced in building pixel-perfect{" "}
+              <CustomBadge text='Frontend' /> application and server side applications (
+              <CustomBadge text='Backend' />
+              ). I'm passionate about sharing my experience in my career, and also some
+              technologies/concept that i believe can help someone out there. When i'm not working
+              or learning something new , then i must be working out at the{" "}
+              <CustomBadge text='Gym' />, or playing video Games, or watching Anime or any movie
+              with superhero in it.
+            </Text>
+          </VStack>
+        </HStack>
+        <FooterLink to='resume'>
+          <Text>Check out my resume</Text>
+        </FooterLink>
+      </VStack>
     </Box>
   );
 };
