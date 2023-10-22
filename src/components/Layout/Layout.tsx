@@ -88,11 +88,12 @@ const Layout = () => {
             bg={bgColor}
           >
             {PageLink.map(({ icon, route }) => {
-              const isActiive = pathname === route;
+              const isActive = pathname === route;
               return (
                 <Link key={route} to={route}>
                   <IconButton
-                    bg={isActiive ? "gray.100" : ""}
+                    bg={isActive ? uiColor : ""}
+                    color={isActive ? "light.100" : "dark.300"}
                     aria-label='Navigation Button'
                     icon={icon}
                     isRound
