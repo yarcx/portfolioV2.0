@@ -67,10 +67,10 @@ const AuthContextProvider = ({ children }: { children: React.ReactElement }) => 
     try {
       const { data, error } = await supabase.auth.getUser();
       if (!error) {
-        const { user_name, avatar_url } = data?.user?.identities?.[0]?.identity_data ?? {};
+        const { name, avatar_url } = data.user.user_metadata;
         const user = {
-          displayName: user_name,
-          uid: data?.user?.identities?.[0].user_id,
+          displayName: name,
+          uid: data?.user.id,
           photoURL: avatar_url,
           provider: data.user?.app_metadata.provider,
         };

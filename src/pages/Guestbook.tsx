@@ -67,7 +67,7 @@ const Guestbook = () => {
     </Text>
   );
 
-  const loadingJsx = <LoadingComponent text='Messages' />;
+  const loadingJsx = <LoadingComponent text='Guest Signatures' />;
 
   return (
     <Box as='main' w='full'>
@@ -83,7 +83,7 @@ const Guestbook = () => {
         <HStack
           my='1rem'
           align={"center"}
-          justifyContent={["center", "", "", "space-between"]}
+          justifyContent={["center", "space-between", "space-between", "space-between"]}
           flexWrap='wrap'
         >
           <Text

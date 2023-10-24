@@ -36,7 +36,7 @@ const GuestBookRow = ({
         />
       </Box>
       <Box>
-        <Text fontSize='md' fontWeight='semibold'>
+        <Text fontSize='md' fontWeight='semibold' textTransform='capitalize'>
           {displayName || "No Name"} .
         </Text>
         <Text fontSize='sm' fontWeight='normal'>
