@@ -12,6 +12,7 @@ const CustomBadge = ({ text = "Software Engineer" }: { text: string }) => {
       cursor='pointer'
       _hover={{ bg: uiColor, color: "white" }}
       transition='all .2s ease-in'
+      border='0.5px solid'
       textTransform='capitalize'
     >
       {text}

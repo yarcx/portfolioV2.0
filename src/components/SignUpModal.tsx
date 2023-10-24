@@ -3,7 +3,7 @@ import { LIGHT_MODE } from "../utils/constants";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import useAuthContext from "../hooks/useAuthContext";
 import useUiContext from "../hooks/useUiContext";
-import { githubProvider } from "../db.config/firebase";
+// import { githubProvider } from "../db.config/firebase";
 
 const SignUpModal = () => {
   const { colorMode } = useColorMode();
@@ -13,7 +13,7 @@ const SignUpModal = () => {
   return (
     <>
       <ModalHeader textAlign='center' fontSize='xl' fontWeight='extrabold'>
-        Select a Sign up Socials
+        Select a Social to Sign up with.
       </ModalHeader>
       <ModalFooter>
         <HStack
@@ -36,7 +36,9 @@ const SignUpModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             onClick={() => {
-              alert("This is coming soon!!!");
+              // alert("This is coming soon!!!");
+              signInWithGitHub("google");
+              closeModal();
             }}
           >
             Sign in with Google
@@ -53,7 +55,7 @@ const SignUpModal = () => {
             fontWeight='normal'
             _hover={{ opacity: ".9" }}
             onClick={() => {
-              signInWithGitHub(githubProvider);
+              signInWithGitHub("github");
               closeModal();
             }}
           >

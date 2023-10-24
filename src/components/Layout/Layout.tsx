@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   Text,
 } from "@chakra-ui/react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import LeftSideBar from "./LeftSideBar";
 import useDisplayHooks from "../../hooks/useDisplayHooks";
 import { BsSearch } from "react-icons/bs";
@@ -19,7 +19,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Layout = () => {
-  const { pathname } = useLocation();
   const { bgColor, borderColor, displayUiBg } = useDisplayHooks();
   const {
     state: { uiColor },
@@ -88,18 +87,9 @@ const Layout = () => {
             bg={bgColor}
           >
             {PageLink.map(({ icon, route }) => {
-              const isActive = pathname === route;
               return (
                 <Link key={route} to={route}>
-                  <IconButton
-                    bg={isActive ? uiColor : ""}
-                    color={isActive ? "light.100" : "dark.300"}
-                    aria-label='Navigation Button'
-                    _active={{ bg: uiColor, color: isActive ? "light.100" : "dark.300" }}
-                    _focus={{ bg: uiColor, color: isActive ? "light.100" : "dark.300" }}
-                    icon={icon}
-                    isRound
-                  />
+                  <IconButton aria-label='Navigation Button' icon={icon} isRound />
                 </Link>
               );
             })}

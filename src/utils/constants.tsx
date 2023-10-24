@@ -129,8 +129,8 @@ export const Post_As_Guest_Modal = "Post_As_Guest_Modal";
 export const SignUp_Modal = "SignUp_Modal";
 
 export const providers = {
-  "github.com": "github.com",
-  "google.com": "google.com",
+  github: "github",
+  google: "google",
 };
 
 export const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;

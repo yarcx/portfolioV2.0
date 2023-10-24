@@ -124,7 +124,7 @@ const Guestbook = () => {
                 py='.6rem'
                 px='1rem'
                 fontSize='md'
-                leftIcon={user?.provider === providers["github.com"] ? <FaGithub /> : <FaGoogle />}
+                leftIcon={user?.provider === providers["github"] ? <FaGithub /> : <FaGoogle />}
                 fontWeight='normal'
                 _hover={{ opacity: ".9" }}
                 onClick={() => {

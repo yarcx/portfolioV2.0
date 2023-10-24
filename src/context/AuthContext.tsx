@@ -1,13 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import { IUserInfo } from "../utils/types";
 import supabase, { getURL } from "../utils/api";
+import { Provider } from "@supabase/supabase-js";
 
 type IInitialState = {
   user: IUserInfo | null;
   handleSetUser: (user: IUserInfo) => void;
-  signInWithGitHub: (provider?: unknown) => Promise<void>;
+  signInWithGitHub: (provider: Provider) => Promise<void>;
   signOut: () => Promise<void>;
-  // signInWithGitHub: (provider?: GithubAuthProvider | GoogleAuthProvider) => Promise<void>;
 };
 
 const initialState: IInitialState = {
@@ -27,12 +27,12 @@ const AuthContextProvider = ({ children }: { children: React.ReactElement }) => 
 
   const signInWithGitHub = async (
     // provider: GithubAuthProvider | GoogleAuthProvider = githubProvider
-    provider: unknown = "github"
+    provider: Provider
   ) => {
+    console.log(provider, "see provider");
     try {
-      // const response = await signInWithPopup(auth, provider);
       const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "github",
+        provider,
         options: {
           redirectTo: getURL(),
         },
@@ -72,6 +72,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactElement }) => 
           displayName: user_name,
           uid: data?.user?.identities?.[0].user_id,
           photoURL: avatar_url,
+          provider: data.user?.app_metadata.provider,
         };
         handleSetUser(user as IUserInfo);
       } else {
