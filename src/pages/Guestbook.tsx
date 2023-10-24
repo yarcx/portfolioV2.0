@@ -63,7 +63,7 @@ const Guestbook = () => {
     ))
   ) : (
     <Text mt='1rem' w='full' textAlign='center'>
-      Sign up to leave a message. &#x1F604;
+      Sign in to leave a message. &#x1F604;
     </Text>
   );
 

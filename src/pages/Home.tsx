@@ -172,10 +172,10 @@ const Home = () => {
               About Me
             </Text>
             <Text fontWeight='normal' fontSize='sm'>
-              Hello there! I'm Hassan Yaqub . A <CustomBadge text='Software Engineer' />
-              & <CustomBadge text='Technical Writer' /> Based in Nigeria. I'm Experienced in
-              building pixel-perfect <CustomBadge text='Frontend' /> application and server side
-              applications (
+              Hello there! I'm Hassan Yakub . A <CustomBadge text='Software Engineer' /> &{" "}
+              <CustomBadge text='Technical Writer' /> Based in Nigeria. I'm Experienced in building
+              pixel-perfect <CustomBadge text='Frontend' /> application and server side applications
+              (
               <CustomBadge text='Backend' />
               ). I'm passionate about sharing my experience in my career, and also some
               technologies/concept that i believe can help someone out there. When i'm not working
