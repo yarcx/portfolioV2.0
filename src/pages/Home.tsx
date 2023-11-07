@@ -49,6 +49,7 @@ const Home = () => {
             backgroundSize='contain'
             top={["-40px", "-40px", "-40px", "-50px", "-70px"]}
             overflow='hidden'
+            className='profileImage'
             src={avatar}
             alt='profile picture'
             objectFit='cover'
