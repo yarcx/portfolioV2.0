@@ -64,7 +64,7 @@
 
 .profileImage {
   filter: grayscale(100%);
-  transition: filter 0.3s; /* Add a smooth transition effect */
+  transition: filter 0.3s ease-out; /* Add a smooth transition effect */
 }
 
 .profileImage:hover {
