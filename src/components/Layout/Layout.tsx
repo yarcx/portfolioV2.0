@@ -36,6 +36,7 @@ const Layout = () => {
       const formattedQuery = recentReadSearch.replace(/\s+/g, "+");
       const googleURL = `https://www.google.com/search?q=${formattedQuery}`;
       window.open(googleURL, "_blank");
+      setRecentReadSearch("");
     }
     setRecentReadSearch("");
   };
