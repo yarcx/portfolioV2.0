@@ -41,6 +41,10 @@ const Layout = () => {
     setRecentReadSearch("");
   };
 
+  const filteredArticle = articleList.filter((article) => {
+    return article.title.toLowerCase().includes(recentReadSearch);
+  });
+
   return (
     <Box
       bg={bgColor}
@@ -120,11 +124,8 @@ const Layout = () => {
               Recently read articles or Google
             </Heading>
 
-            {articleList
-              .filter((article) => {
-                return article.title.toLowerCase().includes(recentReadSearch);
-              })
-              .map((item, index) => (
+            {filteredArticle.length ? (
+              filteredArticle.map((item, index) => (
                 <Article
                   key={index}
                   author={item.author}
@@ -132,7 +133,16 @@ const Layout = () => {
                   firstParagraph={item.firstParagraph}
                   linkUrl={item.linkUrl}
                 />
-              ))}
+              ))
+            ) : (
+              <Text fontWeight={"light"}>
+                Your Searched article cant be found on this site <br />
+                but you will be redirected to Google!!!{" "}
+                <span role='img' aria-label='happy emoji'>
+                  😊
+                </span>
+              </Text>
+            )}
           </Box>
         </Box>
       </HStack>
