@@ -136,14 +136,7 @@ const Home = () => {
       </HStack>
 
       <VStack>
-        <HStack
-          borderBottom='1px solid'
-          alignItems='stretch'
-          borderColor={borderColor}
-          pt='.5rem'
-          pb='2rem'
-          px='1rem'
-        >
+        <HStack alignItems='stretch' pt='.5rem' pb='2rem' px='1rem'>
           <VStack
             width='60%'
             display={["none", "", "", "flex"]}
@@ -173,21 +166,19 @@ const Home = () => {
               About Me
             </Text>
             <Text fontWeight='normal' fontSize='sm'>
-              Hello there! I'm Hassan Yakub . A <CustomBadge text='Software Engineer' /> &{" "}
-              <CustomBadge text='Technical Writer' /> Based in Nigeria. I'm Experienced in building
-              pixel-perfect <CustomBadge text='Frontend' /> application and server side applications
-              (
-              <CustomBadge text='Backend' />
-              ). I'm passionate about sharing my experience in my career, and also some
-              technologies/concept that i believe can help someone out there. When i'm not working
-              or learning something new , then i must be working out at the{" "}
-              <CustomBadge text='Gym' />, or playing video Games, or watching Anime or any movie
-              with superhero in it.
+              Hey there, I'm Hassan Yakub <CustomBadge text='Software Engineer' /> and{" "}
+              <CustomBadge text='Technical Wordsmith' /> from Nigeria. I craft sleek{" "}
+              <CustomBadge text='Frontend' /> masterpieces and robust <CustomBadge text='Backend' />
+              , blending pixel-perfect precision with server-side wizardry. Beyond coding, I'm on a
+              mission to share my career wisdom and tech-trend insights to empower others. When I'm
+              not coding or diving into new tech frontiers, catch me breaking a sweat at the{" "}
+              <CustomBadge text='Gym' />, conquering virtual worlds in video{" "}
+              <CustomBadge text='Games' />, or indulging in epic superhero sagas on screen!
             </Text>
           </VStack>
         </HStack>
         <FooterLink to='resume'>
-          <Text>Check out my resume</Text>
+          <Text>Check out my Resume</Text>
         </FooterLink>
       </VStack>
     </Box>

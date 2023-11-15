@@ -133,7 +133,7 @@ const ContactMe = () => {
       </VStack>
       <Box pos='absolute' bottom={["5rem", "", "3rem", "2rem"]} w='full'>
         <FooterLink to=''>
-          <Text>Go Home</Text>
+          <Text>Back To Home</Text>
         </FooterLink>
       </Box>
     </Box>

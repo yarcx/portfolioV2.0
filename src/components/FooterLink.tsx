@@ -4,10 +4,21 @@ import { BsArrowBarRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { animation } from "../utils/constants";
 import { ReactNode } from "react";
+import useDisplayHooks from "../hooks/useDisplayHooks";
 
 const FooterLink = ({ to = "resume", children }: { to: string; children: ReactNode }) => {
+  const { borderColor } = useDisplayHooks();
   return (
-    <HStack as='footer' justifyContent='end' w='full' mt='1rem' px='1rem'>
+    <HStack
+      borderTop='.8px solid'
+      borderColor={borderColor}
+      as='footer'
+      justifyContent='end'
+      w='full'
+      mt='1rem'
+      px='1rem'
+      pt='1rem'
+    >
       <Link to={`/${to}`}>
         <HStack
           as='div'
