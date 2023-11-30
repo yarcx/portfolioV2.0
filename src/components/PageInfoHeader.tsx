@@ -1,4 +1,12 @@
-import { Button, HStack, IconButton, Text, useColorMode, useDisclosure } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  IconButton,
+  Text,
+  Tooltip,
+  useColorMode,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { GiNightSky } from "react-icons/gi";
 import { FaSun } from "react-icons/fa";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -75,21 +83,29 @@ const PageInfoHeader = () => {
           </Button>
         )}
 
-        {colorMode === LIGHT_MODE ? (
-          <IconButton
-            aria-label='Set Light Mode'
-            onClick={() => setColorMode(DARK_MODE)}
-            icon={<GiNightSky size={24} />}
-            isRound
-          />
-        ) : (
-          <IconButton
-            aria-label='Set Dark Mode'
-            isRound
-            onClick={() => setColorMode(LIGHT_MODE)}
-            icon={<FaSun size={24} />}
-          />
-        )}
+        <Tooltip
+          label={colorMode === LIGHT_MODE ? "Turn on Dark Mode" : "Turn on Light Mode"}
+          hasArrow
+          arrowSize={10}
+          borderRadius={5}
+          closeOnClick={true}
+        >
+          {colorMode === LIGHT_MODE ? (
+            <IconButton
+              aria-label='Set Light Mode'
+              onClick={() => setColorMode(DARK_MODE)}
+              icon={<GiNightSky size={24} />}
+              isRound
+            />
+          ) : (
+            <IconButton
+              aria-label='Set Dark Mode'
+              isRound
+              onClick={() => setColorMode(LIGHT_MODE)}
+              icon={<FaSun size={24} />}
+            />
+          )}
+        </Tooltip>
       </HStack>
       <MobileSidebar isOpen={isOpen} onClose={onClose} />
     </>
