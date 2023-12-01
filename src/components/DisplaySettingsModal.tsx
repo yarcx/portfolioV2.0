@@ -13,6 +13,7 @@ import useUiContext from "../hooks/useUiContext";
 import useDisplayHooks from "../hooks/useDisplayHooks";
 import { App_Ui_Colors, DARK_MODE, LIGHT_MODE } from "../utils/constants";
 import { MdCheck } from "react-icons/md";
+import { useState } from "react";
 
 const DisplaySettingsModal = () => {
   const {
@@ -22,7 +23,9 @@ const DisplaySettingsModal = () => {
   } = useUiContext();
   const { borderColor, displayUiBg, grayText } = useDisplayHooks();
   const { colorMode, setColorMode } = useColorMode();
-
+  const defaultColorIndex = App_Ui_Colors.findIndex((color) => color === uiColor);
+  const [, setColorIndex] = useState(0);
+  const colorIndex = `checkbox.${defaultColorIndex}`;
   const title = modalProps?.title as string;
 
   return (
@@ -48,7 +51,7 @@ const DisplaySettingsModal = () => {
             flexWrap='wrap'
             justify='space-between'
           >
-            {App_Ui_Colors.map((color) => (
+            {App_Ui_Colors.map((color, i) => (
               <HStack
                 align='center'
                 justify='center'
@@ -60,6 +63,7 @@ const DisplaySettingsModal = () => {
                 bg={color}
                 onClick={() => {
                   changeUiColor(color);
+                  setColorIndex(i);
                 }}
               >
                 {uiColor === color && <MdCheck color='white' size='20' />}
@@ -85,6 +89,9 @@ const DisplaySettingsModal = () => {
             <Button
               leftIcon={
                 <Checkbox
+                  colorScheme={colorIndex}
+                  __css={{ "data-focus": { boxShadow: "none" } }}
+                  boxShadow='none'
                   borderColor={borderColor}
                   isChecked={colorMode === LIGHT_MODE}
                   value={LIGHT_MODE}
@@ -94,7 +101,9 @@ const DisplaySettingsModal = () => {
                 </Checkbox>
               }
               bg='white'
-              onClick={() => setColorMode(LIGHT_MODE)}
+              onClick={() => {
+                setColorMode(LIGHT_MODE);
+              }}
               color='black'
               size='lg'
               fontSize='bold'
@@ -105,12 +114,17 @@ const DisplaySettingsModal = () => {
               _hover={{ bg: "white", opacity: ".7" }}
               width='150px'
             ></Button>
+
+            {/* Light out icon */}
             <Button
               leftIcon={
                 <Checkbox
+                  colorScheme={colorIndex}
+                  __css={{ "data-focus": { boxShadow: "none" } }}
+                  boxShadow='none'
                   borderColor={borderColor}
-                  isChecked={colorMode === DARK_MODE}
                   value={DARK_MODE}
+                  isChecked={colorMode === DARK_MODE}
                   onChange={() => setColorMode(DARK_MODE)}
                 >
                   Light out
