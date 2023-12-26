@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import { animation } from "../utils/constants";
 import { ReactNode } from "react";
 import useDisplayHooks from "../hooks/useDisplayHooks";
+import useUiContext from "../hooks/useUiContext";
 
 const FooterLink = ({ to = "resume", children }: { to: string; children: ReactNode }) => {
   const { borderColor } = useDisplayHooks();
+  const {
+    state: { uiColor },
+  } = useUiContext();
   return (
     <HStack
       borderTop='.8px solid'
@@ -24,7 +28,7 @@ const FooterLink = ({ to = "resume", children }: { to: string; children: ReactNo
           as='div'
           align='center'
           transition='all 0.3s ease-in'
-          _hover={{ textDecor: "underline" }}
+          _hover={{ textDecor: "underline", textDecorationColor: uiColor }}
         >
           {children}
           <Box as={motion.div} transition='0.5s linear' animation={animation}>

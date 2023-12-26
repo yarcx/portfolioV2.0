@@ -90,10 +90,10 @@ const GuestBookModal = () => {
             py='.6rem'
             px='1rem'
             fontSize='md'
+            _hover={{ bg: uiColor, opacity: ".9", color: "white" }}
             bg={uiColor}
             leftIcon={<HiOutlineChatBubbleLeftRight />}
             fontWeight='normal'
-            _hover={{ opacity: ".9" }}
             type='submit'
             isLoading={submittingPost}
             disabled={submittingPost}

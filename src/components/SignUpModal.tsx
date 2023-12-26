@@ -8,7 +8,10 @@ import useUiContext from "../hooks/useUiContext";
 const SignUpModal = () => {
   const { colorMode } = useColorMode();
   const { signInWithGitHub } = useAuthContext();
-  const { closeModal } = useUiContext();
+  const {
+    closeModal,
+    state: { uiColor },
+  } = useUiContext();
 
   return (
     <>
@@ -26,6 +29,7 @@ const SignUpModal = () => {
           <Button
             color={colorMode !== LIGHT_MODE ? "white" : "black"}
             size='md'
+            _hover={{ bg: uiColor, opacity: ".9", color: "white", borderColor: uiColor }}
             bg={colorMode !== LIGHT_MODE ? "black" : "white"}
             colorScheme='google'
             variant='outline'
@@ -34,7 +38,6 @@ const SignUpModal = () => {
             fontSize='md'
             leftIcon={<FaGoogle />}
             fontWeight='normal'
-            _hover={{ opacity: ".9" }}
             onClick={() => {
               // alert("This is coming soon!!!");
               signInWithGitHub("google");
@@ -46,6 +49,7 @@ const SignUpModal = () => {
 
           <Button
             color={colorMode === LIGHT_MODE ? "white" : "black"}
+            _hover={{ bg: uiColor, opacity: ".9", color: "white", border: "none" }}
             size='md'
             bg={colorMode === LIGHT_MODE ? "black" : "white"}
             py='.6rem'
@@ -53,7 +57,6 @@ const SignUpModal = () => {
             fontSize='md'
             leftIcon={<FaGithub />}
             fontWeight='normal'
-            _hover={{ opacity: ".9" }}
             onClick={() => {
               signInWithGitHub("github");
               closeModal();

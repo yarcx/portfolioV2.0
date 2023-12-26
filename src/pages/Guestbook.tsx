@@ -23,7 +23,7 @@ import supabase from "../utils/api";
 const Guestbook = () => {
   const {
     openModal,
-    state: { isModalOpen },
+    state: { isModalOpen, uiColor },
   } = useUiContext();
   const { borderColor } = useDisplayHooks();
   const { colorMode } = useColorMode();
@@ -96,6 +96,7 @@ const Guestbook = () => {
           <HStack w='auto' justifyContent='space-between'>
             {user && (
               <Button
+                _hover={{ bg: uiColor, opacity: ".9", color: "white" }}
                 color={colorMode === LIGHT_MODE ? "white" : "black"}
                 size='md'
                 bg={colorMode === LIGHT_MODE ? "black" : "white"}
@@ -103,7 +104,7 @@ const Guestbook = () => {
                 px='1rem'
                 fontSize='md'
                 fontWeight='normal'
-                _hover={{ opacity: ".9" }}
+                transition='all .2s linear'
                 onClick={() => {
                   openModal(Post_As_Guest_Modal, {
                     title: "Display Settings",
@@ -118,6 +119,7 @@ const Guestbook = () => {
 
             {user ? (
               <Button
+                _hover={{ bg: uiColor, opacity: ".9", color: "white" }}
                 color={colorMode === LIGHT_MODE ? "white" : "black"}
                 size='md'
                 bg={colorMode === LIGHT_MODE ? "black" : "white"}
@@ -126,7 +128,6 @@ const Guestbook = () => {
                 fontSize='md'
                 leftIcon={user?.provider === providers["github"] ? <FaGithub /> : <FaGoogle />}
                 fontWeight='normal'
-                _hover={{ opacity: ".9" }}
                 onClick={() => {
                   signOut();
                 }}
@@ -136,6 +137,7 @@ const Guestbook = () => {
             ) : (
               <Button
                 color={colorMode === LIGHT_MODE ? "white" : "black"}
+                _hover={{ bg: uiColor, opacity: ".9", color: "white" }}
                 size='md'
                 bg={colorMode === LIGHT_MODE ? "black" : "white"}
                 py='.6rem'
@@ -143,7 +145,6 @@ const Guestbook = () => {
                 fontSize='md'
                 // leftIcon={<FaGithub />}
                 fontWeight='normal'
-                _hover={{ opacity: ".9" }}
                 onClick={() => {
                   openModal(SignUp_Modal);
                 }}

@@ -7,11 +7,10 @@ const CustomBadge = ({ text = "Software Engineer" }: { text: string }) => {
   } = useUiContext();
   return (
     <Badge
-      variant='outline'
       px='1'
       cursor='pointer'
-      _hover={{ bg: uiColor, color: "white" }}
-      transition='all .2s ease-in'
+      _hover={{ bg: uiColor, color: "white", border: ".5px solid", borderColor: uiColor }}
+      transition='all .2s linear'
       border='0.5px solid'
       textTransform='capitalize'
     >
