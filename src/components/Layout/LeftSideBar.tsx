@@ -70,7 +70,7 @@ const LinkButton = ({ link, route, isActive, Icon }: LinkButtonProps) => {
         <Button
           textAlign='left'
           transition='all .3s ease'
-          py='1rem'
+          py='1.4rem'
           rounded='30px'
           bg='none'
           fontWeight={isActive ? "extrabold" : ""}

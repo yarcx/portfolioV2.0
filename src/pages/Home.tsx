@@ -60,7 +60,7 @@ const Home = () => {
 
         <Button
           size={"sm"}
-          border='1px solid'
+          border='.6px solid'
           borderColor={borderColor}
           bg='transparent'
           rounded='full'
@@ -82,7 +82,7 @@ const Home = () => {
       <HStack
         my='1rem'
         className='scroll-parent'
-        borderBottom='1px solid'
+        borderBottom='.6px solid'
         borderColor={borderColor}
       >
         <Marquee

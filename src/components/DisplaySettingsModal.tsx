@@ -23,9 +23,8 @@ const DisplaySettingsModal = () => {
   } = useUiContext();
   const { borderColor, displayUiBg, grayText } = useDisplayHooks();
   const { colorMode, setColorMode } = useColorMode();
-  const defaultColorIndex = App_Ui_Colors.findIndex((color) => color === uiColor);
+  const defaultColor = App_Ui_Colors.find((color) => color === uiColor);
   const [, setColorIndex] = useState(0);
-  const colorIndex = `checkbox.${defaultColorIndex}`;
   const title = modalProps?.title as string;
 
   return (
@@ -89,7 +88,13 @@ const DisplaySettingsModal = () => {
             <Button
               leftIcon={
                 <Checkbox
-                  colorScheme={colorIndex}
+                  iconColor='white'
+                  _checked={{
+                    "& .chakra-checkbox__control": {
+                      background: defaultColor,
+                      border: defaultColor,
+                    },
+                  }}
                   __css={{ "data-focus": { boxShadow: "none" } }}
                   boxShadow='none'
                   borderColor={borderColor}
@@ -119,12 +124,19 @@ const DisplaySettingsModal = () => {
             <Button
               leftIcon={
                 <Checkbox
-                  colorScheme={colorIndex}
+                  // colorScheme={colorIndex}
+                  iconColor='white'
+                  _checked={{
+                    "& .chakra-checkbox__control": {
+                      background: defaultColor,
+                      border: defaultColor,
+                    },
+                  }}
                   __css={{ "data-focus": { boxShadow: "none" } }}
                   boxShadow='none'
                   borderColor={borderColor}
-                  value={DARK_MODE}
                   isChecked={colorMode === DARK_MODE}
+                  value={DARK_MODE}
                   onChange={() => setColorMode(DARK_MODE)}
                 >
                   Light out

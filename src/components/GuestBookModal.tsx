@@ -44,7 +44,7 @@ const GuestBookModal = () => {
         duration: 3000,
         isClosable: true,
         variant: "top-accent",
-        position: "top",
+        position: "bottom",
         render: () => <CustomToastBar title={"Message Submitted"} />,
       });
       reset();
@@ -55,7 +55,7 @@ const GuestBookModal = () => {
         duration: 3000,
         isClosable: true,
         variant: "top-accent",
-        position: "top",
+        position: "bottom",
         render: () => <CustomToastBar status='error' title={"Something went wrong"} />,
       });
     } finally {

@@ -69,8 +69,8 @@ const Layout = () => {
         <LeftSideBar />
 
         <Flex
-          borderLeft={["", "", "1px solid", "1px solid"]}
-          borderRight={["", "", "", "", "1px solid"]}
+          borderLeft={["", "", ".6px solid", ".6px solid"]}
+          borderRight={["", "", "", "", ".6px solid"]}
           borderColor={["", "", borderColor, borderColor, borderColor]}
           flexGrow={1}
           maxW={["100%", "100%", "100%", "650px", "650px"]}
